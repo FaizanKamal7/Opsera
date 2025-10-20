@@ -1,0 +1,562 @@
+#!/bin/bash
+
+set -e
+
+# =====================================================
+#
+# Forward fixed ENV vars into the PHP container
+#
+EXEC_ENV=""
+
+if [ ! -z "${APP_ENV}" ]; then
+    EXEC_ENV="${EXEC_ENV} -e APP_ENV"
+fi
+
+if [ ! -z "${APP_DEBUG}" ]; then
+    EXEC_ENV="${EXEC_ENV} -e APP_DEBUG"
+fi
+
+if [ ! -z "${XDEBUG_SESSION}" ]; then
+    EXEC_ENV="${EXEC_ENV} -e XDEBUG_SESSION"
+fi
+
+if [ ! -z "${XDEBUG_CONFIG}" ]; then
+    EXEC_ENV="${EXEC_ENV} -e XDEBUG_CONFIG"
+fi
+
+#
+# Determine the user which is executing the commands
+#
+EXEC_USER="${EXEC_AS_USER:-expertm}"
+# =====================================================
+
+THIS_SCRIPT=$(basename "$0")
+DOCKER_COMP="docker compose"
+PHP_CONT="$DOCKER_COMP exec ${EXEC_ENV} -u ${EXEC_USER} php"
+PHP="$PHP_CONT php"
+COMPOSER="$PHP_CONT composer"
+SYMFONY="$PHP_CONT bin/console"
+
+if [ -z "${CI_JOB_ID}" ]; then
+    GREEN='\033[0;32m'
+    YELLOW='\033[0;33m'
+    NC='\033[0m'
+fi
+
+cli_help() {
+printf "
+${YELLOW} —— The SmartFlow CLI tool ——————————————————————————————————————————————————— ${NC}${GREEN}
+help                    ${NC}Outputs this help screen                                          ${NC}${GREEN}
+init                    ${NC}Initialize the project for local development                      ${NC}${GREEN}
+${YELLOW} —— 🐳 Docker ———————————————————————————————————————————————————————————————— ${NC}${GREEN}
+build                   ${NC}Builds the Docker images (default caching used)                   ${NC}${GREEN}
+rebuild                 ${NC}Rebuilds the Docker images (no cache used)                        ${NC}${GREEN}
+up                      ${NC}Create and start the Docker containers                            ${NC}${GREEN}
+ps                      ${NC}List containers                                                   ${NC}${GREEN}
+sc                      ${NC}List the state of the services                                    ${NC}${GREEN}
+start                   ${NC}Start the containers                                              ${NC}${GREEN}
+stop                    ${NC}Stop the containers                                               ${NC}${GREEN}
+down                    ${NC}Stop and remove containers                                        ${NC}${GREEN}
+restart                 ${NC}Restart containers                                                ${NC}${GREEN}
+recreate                ${NC}Recreate containers                                               ${NC}${GREEN}
+logs                    ${NC}Show live logs                                                    ${NC}${GREEN}
+php-sh                  ${NC}Open shell for the PHP container                                  ${NC}${GREEN}
+${YELLOW} —— 🧙 Composer —————————————————————————————————————————————————————————————— ${NC}${GREEN}
+composer                ${NC}Run composer command. Example: ./${THIS_SCRIPT} composer install  ${NC}${GREEN}
+vendor                  ${NC}Install vendors                                                   ${NC}${GREEN}
+vendor-dev              ${NC}Install vendors (including dev packages)                          ${NC}${GREEN}
+${YELLOW} —— 🎵 Symfony ——————————————————————————————————————————————————————————————— ${NC}${GREEN}
+sf                      ${NC}Run Symfony commands. Example ./${THIS_SCRIPT} sf debug:config    ${NC}${GREEN}
+cc                      ${NC}Clear the cache                                                   ${NC}${GREEN}
+${YELLOW} —— 🐘 Database —————————————————————————————————————————————————————————————— ${NC}${GREEN}
+db-console              ${NC}Open database console. Example: ./${THIS_SCRIPT} db-console -Uexpertm db ${NC}${GREEN}
+db-create               ${NC}Create/Recreate the database                                      ${NC}${GREEN}
+db-migrate              ${NC}Execute database migrations                                       ${NC}${GREEN}
+db-diff                 ${NC}Create database migration script                                  ${NC}${GREEN}
+db-fixtures             ${NC}Apply database fixtures                                           ${NC}${GREEN}
+${YELLOW} —— 🧪 Tests ————————————————————————————————————————————————————————————————— ${NC}${GREEN}
+lint-yaml               ${NC}Check YAML files                                                  ${NC}${GREEN}
+lint-twig               ${NC}Check Twig templates                                              ${NC}${GREEN}
+lint-translations       ${NC}Check translations                                                ${NC}${GREEN}
+lint-container          ${NC}Check container parameters and services                           ${NC}${GREEN}
+lint-entities           ${NC}Check Doctrine entities                                           ${NC}${GREEN}
+php-cs-fixer            ${NC}Run code style static analysis                                    ${NC}${GREEN}
+psalm                   ${NC}Run psalm static analysis                                         ${NC}${GREEN}
+phpstan                 ${NC}Run phpstan static analysis                                       ${NC}${GREEN}
+phpunit                 ${NC}Run phpunit tests                                                 ${NC}${GREEN}
+ci                      ${NC}Run CI tests                                                      ${NC}${GREEN}
+${YELLOW} —— 🛠️ Tools ————————————————————————————————————————————————————————————————— ${NC}${GREEN}
+intl-update             ${NC}Update internationalization (translations, localizations, etc.)   ${NC}${GREEN}
+php-fix-cs              ${NC}Fix PHP files to be compliant with coding standards               ${NC}${GREEN}
+psalm-fix-preview       ${NC}View possible psalm fix suggestions                               ${NC}${GREEN}
+${NC}"
+}
+
+# ===========================================================================================
+# Docker
+# ===========================================================================================
+
+cli_docker_build() {
+    $DOCKER_COMP build $@
+}
+
+cli_docker_rebuild() {
+    $DOCKER_COMP build --pull --no-cache $@
+}
+
+cli_docker_up() {
+    $DOCKER_COMP up --wait --detach $@
+}
+
+cli_docker_ps() {
+    if [ "$#" -eq 0 ]; then
+        $DOCKER_COMP ps -a --format "table {{.Name}}\t{{.Image}}\t{{.Service}}\t{{.CreatedAt}}\t{{.Status}}\t{{.Ports}}"
+    else
+        $DOCKER_COMP ps $@
+    fi
+}
+
+cli_docker_sc() {
+    $DOCKER_COMP ps -a --format "table {{.Service}}\t{{.State}}\t{{.Status}}"
+}
+
+cli_docker_start() {
+    $DOCKER_COMP start $@
+}
+
+cli_docker_stop() {
+    $DOCKER_COMP stop $@
+}
+
+cli_docker_down() {
+    $DOCKER_COMP down --remove-orphans $@
+}
+
+cli_docker_restart() {
+    $DOCKER_COMP restart $@
+}
+
+cli_docker_recreate() {
+    $DOCKER_COMP up --wait --detach --force-recreate $@
+}
+
+cli_docker_logs() {
+    $DOCKER_COMP logs --tail=0 --follow $@
+}
+
+cli_docker_php_sh() {
+    $PHP_CONT bash $@
+}
+
+# ===========================================================================================
+# Composer
+# ===========================================================================================
+
+cli_composer() {
+    $COMPOSER $@
+}
+
+cli_composer_vendor() {
+    $COMPOSER install --prefer-dist --no-dev --no-progress --no-scripts --no-interaction $@
+}
+
+cli_composer_vendor_dev() {
+    $COMPOSER install --prefer-dist --no-interaction $@
+}
+
+# ===========================================================================================
+# Symfony
+# ===========================================================================================
+
+cli_symfony() {
+    $SYMFONY $@
+}
+
+cli_symfony_cc() {
+    $SYMFONY cache:clear $@
+}
+
+cli_symfony_lint_yaml() {
+    printf "\n${YELLOW}Lint YAML files...${NC}\n\n"
+    cli_symfony lint:yaml config --parse-tags $@
+}
+
+cli_symfony_lint_twig() {
+    printf "\n${YELLOW}Lint Twig templates...${NC}\n\n"
+    cli_symfony lint:twig templates $@
+}
+
+cli_symfony_lint_translations() {
+    printf "\n${YELLOW}Lint XLIFF translation files...${NC}\n\n"
+    cli_symfony lint:xliff translations $@
+
+    printf "\n${YELLOW}Lint translation contents...${NC}\n\n"
+    cli_symfony lint:translations $@
+}
+
+cli_symfony_lint_container() {
+    printf "\n${YELLOW}Lint Container Parameters and Services...${NC}\n\n"
+    cli_symfony lint:container --no-debug $@
+}
+
+cli_symfony_lint_entities() {
+    printf "\n${YELLOW}Lint Doctrine entities...${NC}\n\n"
+    cli_symfony doctrine:schema:validate --skip-sync -vvv --no-interaction $@
+}
+
+# ===========================================================================================
+# Database
+# ===========================================================================================
+
+cli_database_console() {
+    $DOCKER_COMP exec database mysql $@
+}
+
+cli_database_create() {
+    $SYMFONY doctrine:database:drop --force --if-exists $@ -nq
+    $SYMFONY doctrine:database:create --if-not-exists $@ -nq
+}
+
+cli_database_migrate() {
+    $SYMFONY doctrine:migrations:migrate $@
+}
+
+cli_database_diff() {
+    $SYMFONY doctrine:migrations:diff --formatted $@
+}
+
+cli_database_fixtures() {
+    $SYMFONY doctrine:fixtures:load $@
+}
+
+# ===========================================================================================
+# Tests
+# ===========================================================================================
+
+cli_tests_php_cs_fixer() {
+    printf "\n${YELLOW}Checking code style...${NC}\n\n"
+    php_tools_php_cs_fixer fix --no-interaction --dry-run --using-cache=no --diff $@
+}
+
+cli_tests_psalm() {
+    printf "\n${YELLOW}Checking code static analysis...${NC}\n\n"
+    php_tools_psalm --show-info=true --no-cache $@
+}
+
+cli_tests_phpstan() {
+    printf "\n${YELLOW}Checking code static analysis...${NC}\n\n"
+    php_tools_phpstan analyze --configuration=phpstan.dist.neon --memory-limit=2048M $@
+}
+
+cli_tests_phpunit() {
+    printf "\n${YELLOW}Running PHPUnit tests...${NC}\n\n"
+    $PHP_CONT bin/phpunit $@
+}
+
+cli_tests_ci() {
+    $COMPOSER validate --strict
+    $COMPOSER audit
+    cli_symfony_cc
+    cli_symfony_lint_yaml
+    cli_symfony_lint_twig
+    cli_symfony_lint_translations
+    cli_symfony_lint_container
+    cli_symfony_lint_entities
+    cli_tests_php_cs_fixer
+    cli_tests_psalm
+    cli_tests_phpstan
+    cli_tests_phpunit
+}
+
+# ===========================================================================================
+# Tools
+# ===========================================================================================
+
+php_tools_php_cs_fixer() {
+    if [ ! -d "tools/php-cs-fixer/vendor" ]; then
+        printf "\n${YELLOW}Installing PHP CS Fixer...${NC}\n\n"
+        $PHP_CONT mkdir -p tools/php-cs-fixer
+        $COMPOSER install -n --working-dir=tools/php-cs-fixer --classmap-authoritative
+    fi
+
+# Temporally until php-cs-fixer gets support for php 8.4
+#    $PHP_CONT tools/php-cs-fixer/vendor/bin/php-cs-fixer $@
+
+# Temporally until php-cs-fixer gets support for php 8.4
+    PHP_CS_FIXER_IGNORE_ENV=1 $DOCKER_COMP exec ${EXEC_ENV} -u ${EXEC_USER} -e PHP_CS_FIXER_IGNORE_ENV php tools/php-cs-fixer/vendor/bin/php-cs-fixer $@
+}
+
+php_tools_psalm() {
+    if [ ! -d "tools/psalm/vendor" ]; then
+        printf "\n${YELLOW}Installing Psalm...${NC}\n\n"
+        $PHP_CONT mkdir -p tools/psalm
+        $COMPOSER install -n --working-dir=tools/psalm --classmap-authoritative
+    fi
+
+    $PHP tools/psalm/vendor/bin/psalm.phar $@
+}
+
+php_tools_phpstan() {
+    if [ ! -d "tools/phpstan/vendor" ]; then
+        printf "\n${YELLOW}Installing PHPStan...${NC}\n\n"
+        $PHP_CONT mkdir -p tools/phpstan
+        $COMPOSER install -n --working-dir=tools/phpstan --classmap-authoritative
+    fi
+
+    $PHP_CONT tools/phpstan/vendor/bin/phpstan $@
+}
+
+cli_intl_update() {
+    cli_symfony_lint_translations
+
+    $SYMFONY translation:extract --force en --domain messages
+    $SYMFONY translation:extract --force bg --domain messages
+
+    $SYMFONY translation:extract --force en --domain flashmessages
+    $SYMFONY translation:extract --force bg --domain flashmessages
+}
+
+cli_tools_php_fix_cs() {
+    php_tools_php_cs_fixer fix $@
+}
+
+cli_tools_psalm_fix_preview() {
+    printf "\n${YELLOW}Searching for possible psalm fixes...${NC}\n\n"
+    php_tools_psalm --alter --dry-run --no-cache $@
+}
+
+cli_init() {
+    IS_CI="n"
+    if [ "$1" = "--ci" ] || [ "$2" = "--ci" ]; then
+        IS_CI="y"
+    fi
+
+    if [ "$IS_CI" = "y" ]; then
+        printf "\n${YELLOW}Initializing the project for CI environment...${NC}\n\n"
+    else
+        printf "\n${YELLOW}Initializing the project for local development...${NC}\n\n"
+    fi
+
+    DEFAULT_SERVER_NAME="smartflow.projects.local"
+    if [ "$IS_CI" = "y" ]; then
+        DEFAULT_SERVER_NAME="localhost"
+    else
+        read -p "Enter project's local hostname [$DEFAULT_SERVER_NAME]: " NEW_SERVER_NAME
+    fi
+    NEW_SERVER_NAME=${NEW_SERVER_NAME:-$DEFAULT_SERVER_NAME}
+
+    NEW_APP_SECRET=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 48 | head -n 1)
+    NEW_MERCURE_JWT_SECRET=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 40 | head -n 1)
+
+    if [ ! -f "compose.override.yaml" ]; then
+        cp compose.override.yaml.dist compose.override.yaml
+    fi
+
+    if [ ! -f ".env.local" ]; then
+cat > .env.local << EOF
+SERVER_NAME=$NEW_SERVER_NAME
+
+APP_SECRET=$NEW_APP_SECRET
+
+MERCURE_URL=https://php/.well-known/mercure
+MERCURE_PUBLIC_URL=https://$NEW_SERVER_NAME/.well-known/mercure
+MERCURE_JWT_SECRET="$NEW_MERCURE_JWT_SECRET"
+
+EOF
+    fi
+
+    if [ ! -f ".env.dev.local" ]; then
+cat > .env.dev.local << EOF
+XDEBUG_MODE=debug
+XDEBUG_CONFIG=client_host=host.docker.internal
+PHP_IDE_CONFIG=serverName=$NEW_SERVER_NAME
+
+EOF
+    fi
+
+    if [ "$IS_CI" = "y" ]; then
+        echo "No need to rebuild (CI)!"
+        rm -f ./.*.dev.local
+    else
+        $DOCKER_COMP build
+    fi
+
+    echo "Starting containers ..."
+
+    $DOCKER_COMP up --no-build --wait --detach
+
+    $COMPOSER install -a
+
+    printf "\n${YELLOW}Building required assets...${NC}\n"
+    $SYMFONY importmap:install
+    $SYMFONY assets:install
+    $SYMFONY sass:build
+
+    printf "\n${YELLOW}Installing developer tools...${NC}\n"
+
+    $COMPOSER install-tools
+    $PHP_CONT bin/phpunit --version
+
+    printf "\n${YELLOW}Loading default database fixtures...${NC}\n"
+
+    $SYMFONY doctrine:fixtures:load -n
+    printf "\n"
+    $SYMFONY --version
+
+    printf "\n${YELLOW}Project initialization finished.${NC}\n"
+    printf "\nYou can access the project at ${GREEN}https://$NEW_SERVER_NAME${NC}\n"
+    printf "Credentials: expertm/111111 or admin/123456\n\n"
+}
+
+case $1 in
+    "help")
+        cli_help
+        exit
+        ;;
+    "init")
+        cli_init ${@:2}
+        exit
+        ;;
+    "build")
+        cli_docker_build ${@:2}
+        exit
+        ;;
+    "rebuild")
+        cli_docker_rebuild ${@:2}
+        exit
+        ;;
+    "up")
+        cli_docker_up ${@:2}
+        exit
+        ;;
+    "ps")
+        cli_docker_ps ${@:2}
+        exit
+        ;;
+    "sc")
+        cli_docker_sc ${@:2}
+        exit
+        ;;
+    "start")
+        cli_docker_start ${@:2}
+        exit
+        ;;
+    "stop")
+        cli_docker_stop ${@:2}
+        exit
+        ;;
+    "down")
+        cli_docker_down ${@:2}
+        exit
+        ;;
+    "restart")
+        cli_docker_restart ${@:2}
+        exit
+        ;;
+    "recreate")
+        cli_docker_recreate ${@:2}
+        exit
+        ;;
+    "logs")
+        cli_docker_logs ${@:2}
+        exit
+        ;;
+    "php-sh")
+        cli_docker_php_sh ${@:2}
+        exit
+        ;;
+    "composer"|"cp")
+        cli_composer ${@:2}
+        exit
+        ;;
+    "vendor")
+        cli_composer_vendor ${@:2}
+        exit
+        ;;
+    "vendor-dev")
+        cli_composer_vendor_dev ${@:2}
+        exit
+        ;;
+    "sf")
+        cli_symfony ${@:2}
+        exit
+        ;;
+    "cc")
+        cli_symfony_cc ${@:2}
+        exit
+        ;;
+    "db-console")
+        cli_database_console ${@:2}
+        exit
+        ;;
+    "db-create")
+        cli_database_create ${@:2}
+        exit
+        ;;
+    "db-migrate")
+        cli_database_migrate ${@:2}
+        exit
+        ;;
+    "db-diff")
+        cli_database_diff ${@:2}
+        exit
+        ;;
+    "db-fixtures")
+        cli_database_fixtures ${@:2}
+        exit
+        ;;
+    "lint-yaml")
+        cli_symfony_lint_yaml ${@:2}
+        exit
+        ;;
+    "lint-twig")
+        cli_symfony_lint_twig ${@:2}
+        exit
+        ;;
+    "lint-translations")
+        cli_symfony_lint_translations ${@:2}
+        exit
+        ;;
+    "lint-container")
+        cli_symfony_lint_container ${@:2}
+        exit
+        ;;
+    "lint-entities")
+        cli_symfony_lint_entities ${@:2}
+        exit
+        ;;
+    "php-cs-fixer")
+        cli_tests_php_cs_fixer ${@:2}
+        exit
+        ;;
+    "psalm")
+        cli_tests_psalm ${@:2}
+        exit
+        ;;
+    "phpstan")
+        cli_tests_phpstan ${@:2}
+        exit
+        ;;
+    "phpunit")
+        cli_tests_phpunit ${@:2}
+        exit
+        ;;
+    "ci")
+        cli_tests_ci ${@:2}
+        exit
+        ;;
+    "intl-update")
+        cli_intl_update ${@:2}
+        exit
+        ;;
+    "php-fix-cs")
+        cli_tools_php_fix_cs ${@:2}
+        exit
+        ;;
+    "psalm-fix-preview")
+        cli_tools_psalm_fix_preview ${@:2}
+        exit
+        ;;
+esac
+
+cli_help

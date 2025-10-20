@@ -1,0 +1,84 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    app.version: '1.0.1'
+    app.locale: 'en'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            # this allows to define the scalar arguments once and apply them to any services
+            # defined/created in this file; if some argument is used rarely, instead of defining
+            # it here you can use the #[Autowire] attribute to inject it manually in the service constructor
+            array $enabledLocales: '%kernel.enabled_locales%'
+            string $defaultLocale: '%app.locale%'
+            string $defaultEnv: '%kernel.environment%'
+    
+    security.access.simple_role_voter:
+        class: App\Security\Voter\ACLVoter
+
+    app.user_menu_links_service:
+        alias: App\Service\NavigationBuilder
+        public: true
+
+    App\Client\AkeneoProductClient:
+        arguments:
+            $client: '@akeneo_products.client'
+            $cache: '@cache.app'
+    #         $tokenUrl: '%env(AKENEO_OAUTH_TOKEN_URL)%'
+    #         $clientId: '%env(AKENEO_CLIENT_ID)%'
+    #         $clientSecret: '%env(AKENEO_CLIENT_SECRET)%'
+    #         $username: '%env(AKENEO_USERNAME)%'
+    #         $password: '%env(AKENEO_PASSWORD)%'
+
+
+    App\Service\NavigationBuilder:
+        arguments:
+            $security: '@security.helper'
+        tags:
+            - { name: 'twig.runtime' }
+
+    App\Service\LoadingStateService:
+        arguments:
+            - '@request_stack'
+
+    App\Command\ManualsScanCommand:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+            $scanner: '@App\Service\ManualScanService'
+
+    App\Service\SvnService:
+        arguments:
+            $svnUrl: '%env(SVN_REPOSITORY_URL)%'
+            $username: '%env(SVN_USERNAME)%'
+            $password: '%env(SVN_PASSWORD)%'
+
+    App\Service\ManualScanService:
+        arguments:
+            $manuals_directory: '%env(MANUALS_DIRECTORY)%'
+            $project_dir: '%kernel.project_dir%'
+
+    App\Twig\AppExtension:
+        tags: [ 'twig.extension' ]
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Utils/'
+            - '../src/Kernel.php'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+#    
+#    App\Utils\Domain\ReadModel\ReadDataProviderInterface:
+#        shared: false

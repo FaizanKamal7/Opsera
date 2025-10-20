@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="hj7Tvea" resname="user.profile.updated">
+        <source>user.profile.updated</source>
+        <target>Your profile was updated successfully.</target>
+      </trans-unit>
+      <trans-unit id="Hi4d31A" resname="user.profile.password_changed">
+        <source>user.profile.password_changed</source>
+        <target>Your password was changed successfully. You must login again using the new password!</target>
+      </trans-unit>
+      <trans-unit id="b_8Lw90" resname="app.users.delete.result.successful">
+        <source>app.users.delete.result.successful</source>
+        <target>The user was successfully removed!</target>
+      </trans-unit>
+      <trans-unit id="STQJnjo" resname="app.users.activate.none">
+        <source>app.users.activate.none</source>
+        <target>No users were activated!</target>
+      </trans-unit>
+      <trans-unit id="LWnKKYE" resname="app.users.activate.success">
+        <source>app.users.activate.success</source>
+        <target>{count, plural, =0 {No users were activated!} =1 {User "{username}" was activated successfully!} other {# users were activate successfully!}}</target>
+      </trans-unit>
+      <trans-unit id="Zq8T8iW" resname="app.users.deactivate.none">
+        <source>app.users.deactivate.none</source>
+        <target>No users were deactivated!</target>
+      </trans-unit>
+      <trans-unit id="Dny0xnX" resname="app.users.deactivate.success">
+        <source>app.users.deactivate.success</source>
+        <target>{count, plural, =0 {No users were deactivated!} =1 {User "{username}" was deactivated successfully!} other {# users were deactivate successfully!}}</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

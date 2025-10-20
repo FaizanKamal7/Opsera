@@ -1,0 +1,38 @@
+<div {{ attributes }}>
+    <div class="search-box" style="opacity: 0.7;">
+        <div class="dropdown">
+            <button class="btn btn-secondary text-dark dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Search by: {{ this.searchBy }}
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item" href="#" data-model="searchBy" data-value="name"
+                        data-action="click->live#update">
+                        Name
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#" data-model="searchBy" data-value="sku"
+                        data-action="click->live#update">
+                        SKU
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <input type="text" name="search_product"
+            placeholder="{{ this.searchBy == 'name' ? 'Produktname eingeben ...' : 'Produkt SKU eingeben ...' }}"
+            data-model="query">
+        <button data-action="live#emit" data-live-event-param="updateSearch"
+            data-live-search-by-param="{{ this.searchBy }}" data-live-query-param="{{ this.query }}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                <path d="M21 21l-6 -6" />
+            </svg>
+        </button>
+    </div>
+</div>

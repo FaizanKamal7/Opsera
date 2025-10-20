@@ -1,0 +1,109 @@
+.app-ui-datagrid {
+    table {
+        > thead {
+            > tr {
+                > th {
+                    &.row-action-group-header {
+                        width: 1%;
+                        white-space: nowrap;
+                    }
+                }
+                &.filter-row {
+                    > th {
+                        padding: 0;
+                        text-transform: none;
+                        > input, > select, > .input-group > input, > .input-group > select, > .form-control, > .form-select {
+                            border-left: none;
+                            border-top: none;
+                            border-bottom: none;
+                            border-radius: 0;
+                            &:focus {
+                                box-shadow: none;
+                                z-index: initial;
+                            }
+                        }
+                        > .input-group > .btn {
+                            border-radius: 0;
+                            border-top: none;
+                            border-bottom: none;
+                            &.dropdown-toggle {
+                                &::after {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        > tbody {
+            > tr {
+                > td {
+                    &.row-action-group {
+                        width: 1%;
+                        white-space: nowrap;
+                        .btn-sm {
+                            --tblr-btn-padding-y: 0.275rem;
+                        }
+                        .list-inline-item:not(:last-child) {
+                            margin-inline-end: 0.2rem;
+                        }
+                    }
+                }
+            }
+        }
+        &.table-bordered {
+            > thead {
+                > tr {
+                    &.filter-row {
+                        > th {
+                            > input, > select, > .input-group > input, > .input-group > select, > .form-control, > .form-select {
+                                border: none;
+                            }
+                            > .input-group > .btn {
+                                border-radius: 0;
+                                border: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.table-condensed {
+            > tbody {
+                > tr {
+                    > td {
+                        padding: 0.50rem;
+                    }
+                }
+            }
+        }
+    }
+    //> .card, > form > .card {
+    //    min-height: 700px;
+    //}
+    .loading-overlay {
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 1;
+        z-index: 100;
+        margin: auto;
+        > div {
+            z-index: 102;
+        }
+        > div.background {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            opacity: 0.2;
+            background-color: var(--tblr-bg-surface);
+            z-index: 101;
+        }
+    }
+}

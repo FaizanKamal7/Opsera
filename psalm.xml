@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="1"
+    resolveFromConfigFile="true"
+    findUnusedBaselineEntry="true"
+    findUnusedCode="false"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+>
+    <projectFiles>
+        <directory name="src" />
+        <ignoreFiles>
+            <file name="src/Kernel.php" />
+            <!-- Migrated from legacy code - do not bother fixing -->
+            <file name="src/Utils/ACL/RoleRegistry.php" />
+            <file name="src/Utils/ACL/AbstractACL.php" />
+            <file name="src/Utils/ACL/Manager.php" />
+            <directory name="src/Utils" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <ClassMustBeFinal errorLevel="suppress" />
+        <ImplicitToStringCast errorLevel="suppress" />
+        <MissingOverrideAttribute>
+            <errorLevel type="suppress">
+                <directory name="src" />
+            </errorLevel>
+        </MissingOverrideAttribute>
+        <RedundantConditionGivenDocblockType>
+            <errorLevel type="suppress">
+                <directory name="src" />
+            </errorLevel>
+        </RedundantConditionGivenDocblockType>
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <directory name="src" />
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+    </issueHandlers>
+
+    <forbiddenFunctions>
+        <function name="empty"/>
+    </forbiddenFunctions>
+</psalm>

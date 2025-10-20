@@ -1,0 +1,24 @@
+{% deprecated 'Krasen: This column type needs adjustment. At the current time of writing this there was no actual need of this column type.' %}
+
+{#{% set value = column.value(item) %}#}
+
+{#{% if value is not null -%}#}
+{#    {%- set action = {#}
+{#        'url': path(params.route, {'id': value.id}|merge(params.route_extra_params|default([]))),#}
+{#        'name': value,#}
+{#        'target': params.target|default('offcanvas'),#}
+{#        'suffix': params.suffix|default(''),#}
+{#        'class': params.class|default('')#}
+{#    } -%}#}
+{#    {%- set as_link = as_link|default(true) -%}#}
+
+{#    <twig:a#}
+{#        href="{{ path(params.route, {'id': value.id}|merge(params.route_extra_params|default([]))) }}"#}
+{#        modal="{{ action.modal is defined and action.modal }}"#}
+{#        target="{{ action.target is defined ? action.target : (action.frame_target_top ?? false) ? '_top' : '' }}"#}
+{#    >#}
+{#        {{ value }}#}
+{#    </twig:a>#}
+{#{% else -%}#}
+{#    {{- null_value|default('-') -}}#}
+{#{%- endif %}#}

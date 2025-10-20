@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wiltec Service-Portal</title>
+    {{ importmap() }}
+
+</head>
+
+<body>
+    {% include 'partials/_global_loading.html.twig' %}
+    {% include 'main/includes/_header.html.twig' %}
+    <section id="main">
+        {% block page_content_header %} {% endblock page_content_header %}
+        <div class="container">
+            {% block page_content %}{% endblock %}
+        </div>
+    </section>
+</body>
+
+</html>

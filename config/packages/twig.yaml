@@ -1,0 +1,16 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    file_name_pattern: '*.twig'
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+#    exception_controller: null
+    paths:
+        '%kernel.project_dir%/templates/theme': theme
+        '%kernel.project_dir%/vendor/kevinpapst/tabler-bundle/templates': theme
+
+    globals:
+        app_server_name: '%env(SERVER_NAME)%'
+
+when@test:
+    twig:
+        strict_variables: true

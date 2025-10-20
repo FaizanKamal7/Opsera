@@ -1,0 +1,16 @@
+<ul class="list-inline m-0 text-end">
+{% for action in actions %}
+    {% if action.visible is not defined or action.visible %}
+        <li class="list-inline-item">
+            <a
+                href="{{ action.url|default('#') }}"
+                class="btn btn-{{ action.type|default('default') }} {% if not action.label|default('') %}btn-icon{% endif %} btn-sm rounded-2"
+                title="{{ action.title|default() }}"
+                {%  if action.confirm is defined %} onclick="return confirm({{ action.confirm|json_encode }});" {% endif %}
+            >
+                <i class="icon icon-sm {{ action.icon|default('fa fa-ellipsis') }}"></i> {{ action.label|default('') }}
+            </a>
+        </li>
+    {% endif %}
+{% endfor %}
+</ul>

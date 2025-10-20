@@ -1,0 +1,12 @@
+{% set rawValue = column.rawValue(item) %}
+{% if column.values|length > 0 %}
+    {% set value = column.value(item) %}
+{% else %}
+    {% set value = rawValue ? 'ui.datagrid.column.boolean.true'|trans : 'ui.datagrid.column.boolean.false'|trans %}
+{% endif %}
+
+{% if rawValue %}
+    <span class="badge bg-green text-green-fg" style="text-transform: uppercase;">{{ value }}</span>
+{% else %}
+    <span class="badge bg-red text-red-fg" style="text-transform: uppercase;">{{ value }}</span>
+{% endif %}

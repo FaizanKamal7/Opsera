@@ -1,0 +1,101 @@
+<div{{ attributes.defaults({class: 'd-inline-flex'}) }}>
+    <nav>
+        {% set classAlign = (align is not defined) ? '' : align == 'center' ? ' justify-content-center' : (align == 'right' ? ' justify-content-end' : '') %}
+        {% set classSize = (size is not defined) ? '' : size == 'large' ? ' pagination-lg' : (size == 'small' ? ' pagination-sm' : '') %}
+        <ul class="pagination m-0 {{ classAlign }}{{ classSize }}">
+
+            {% if this.firstPage is not null and this.firstPage != this.currentPage %}
+                <li class="page-item">
+                    <a class="page-link" rel="prev" href="#" data-model="currentPage" data-value="{{ this.firstPage }}" data-action="live#update">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-left">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7l-5 5l5 5" /><path d="M17 7l-5 5l5 5" />
+                        </svg>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-left">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7l-5 5l5 5" /><path d="M17 7l-5 5l5 5" />
+                        </svg>
+                    </span>
+                </li>
+            {% endif %}
+
+            {% if this.previousPage is not null %}
+                <li class="page-item">
+                    <a class="page-link" rel="prev" href="#" data-model="currentPage" data-value="{{ this.previousPage }}" data-action="live#update">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+                            <path d="M15 6l-6 6l6 6"></path>
+                        </svg>
+                        {{ 'ui.datagrid.pagination.previous'|trans }}
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+                            <path d="M15 6l-6 6l6 6"></path>
+                        </svg>
+                        {{ 'ui.datagrid.pagination.previous'|trans }}
+                    </span>
+                </li>
+            {% endif %}
+
+            {% for page in this.pagesInRange %}
+                {% if page != this.currentPage %}
+                    <li class="page-item">
+                        <a class="page-link" href="#" data-model="currentPage" data-value="{{ page }}" data-action="live#update">{{ page }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ page }}</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if this.nextPage is not null %}
+                <li class="page-item">
+                    <a class="page-link" rel="next" href="#" data-model="currentPage" data-value="{{ this.nextPage }}" data-action="live#update">
+                        {{ 'ui.datagrid.pagination.next'|trans }}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+                            <path d="M9 6l6 6l-6 6"></path>
+                        </svg>
+                    </a>
+                </li>
+            {% else %}
+                <li  class="page-item disabled">
+                    <span class="page-link">
+                        {{ 'ui.datagrid.pagination.next'|trans }}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+                            <path d="M9 6l6 6l-6 6"></path>
+                        </svg>
+                    </span>
+                </li>
+            {% endif %}
+
+            {% if this.lastPage is not null and this.lastPage != this.currentPage %}
+                <li class="page-item">
+                    <a class="page-link" rel="prev" href="#" data-model="currentPage" data-value="{{ this.lastPage }}" data-action="live#update">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-right">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7l5 5l-5 5" /><path d="M13 7l5 5l-5 5" />
+                        </svg>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-right">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7l5 5l-5 5" /><path d="M13 7l5 5l-5 5" />
+                        </svg>
+                    </span>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% if this.showTotalItems %}
+    <div class="pagination-total-items p-1 ps-3 ms-2 border-start border-muted" style="">
+        <span class="text-muted">{{ 'ui.datagrid.pagination.records_count'|trans({'%count%': this.totalItems}) }}</span>
+    </div>
+    {% endif %}
+</div>

@@ -1,0 +1,138 @@
+{
+    "name": "expertm/smartflow",
+    "description": "Warehouse and production management for the business.",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.4",
+        "ext-apcu": "*",
+        "ext-intl": "*",
+        "ext-pdo_mysql": "*",
+        "ext-zip": "*",
+        "api-platform/doctrine-orm": "^4.1",
+        "api-platform/symfony": "^4.1",
+        "doctrine/dbal": "^4.2",
+        "doctrine/doctrine-bundle": "^2.13",
+        "doctrine/doctrine-migrations-bundle": "^3.4",
+        "doctrine/orm": "^3.3",
+        "gesdinet/jwt-refresh-token-bundle": "^1.4",
+        "kevinpapst/tabler-bundle": "^1.7",
+        "lexik/jwt-authentication-bundle": "^3.1",
+        "nelmio/api-doc-bundle": "^5.0",
+        "nelmio/cors-bundle": "^2.5",
+        "phpdocumentor/reflection-docblock": "^5.6",
+        "phpstan/phpdoc-parser": "^2.1",
+        "symfony/asset": "^7",
+        "symfony/asset-mapper": "^7",
+        "symfony/console": "^7",
+        "symfony/dotenv": "^7",
+        "symfony/expression-language": "^7",
+        "symfony/flex": "^2",
+        "symfony/form": "^7",
+        "symfony/framework-bundle": "^7",
+        "symfony/html-sanitizer": "^7",
+        "symfony/http-client": "^7",
+        "symfony/intl": "^7",
+        "symfony/mercure-bundle": "^0.3.9",
+        "symfony/messenger": "7.2.*",
+        "symfony/monolog-bundle": "^3.10",
+        "symfony/polyfill-intl-messageformatter": "^1.31",
+        "symfony/property-access": "7.2.*",
+        "symfony/property-info": "7.2.*",
+        "symfony/runtime": "^7",
+        "symfony/scheduler": "7.2.*",
+        "symfony/security-bundle": "^7",
+        "symfony/serializer": "7.2.*",
+        "symfony/stimulus-bundle": "^2.23",
+        "symfony/string": "^7",
+        "symfony/translation": "^7",
+        "symfony/twig-bundle": "^7",
+        "symfony/uid": "7.2.*",
+        "symfony/ux-icons": "^2.23",
+        "symfony/ux-live-component": "^2.23",
+        "symfony/ux-turbo": "^2.23",
+        "symfony/validator": "^7",
+        "symfony/yaml": "^7",
+        "symfonycasts/sass-bundle": "^0.8",
+        "twig/extra-bundle": "^3.20",
+        "twig/intl-extra": "^3.20",
+        "twig/string-extra": "^3.0",
+        "twig/twig": "^3.0",
+        "webmozart/assert": "^1.11"
+    },
+    "require-dev": {
+        "dama/doctrine-test-bundle": "^8.3",
+        "deployer/deployer": "^7.5",
+        "doctrine/doctrine-fixtures-bundle": "^4.0",
+        "symfony/browser-kit": "^7",
+        "symfony/css-selector": "^7",
+        "symfony/debug-bundle": "^7",
+        "symfony/maker-bundle": "^1.62",
+        "symfony/phpunit-bridge": "^7",
+        "symfony/stopwatch": "^7",
+        "symfony/web-profiler-bundle": "^7"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
+    "replace": {
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*",
+        "symfony/polyfill-php82": "*",
+        "symfony/polyfill-php83": "*",
+        "symfony/polyfill-php84": "*"
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "importmap:install": "symfony-cmd",
+            "sass:build": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ],
+        "install-tools": [
+            "@composer --working-dir=tools/php-cs-fixer install -n --classmap-authoritative",
+            "@composer --working-dir=tools/phpstan install -n --classmap-authoritative",
+            "@composer --working-dir=tools/psalm install -n --classmap-authoritative"
+        ],
+        "update-tools": [
+            "@composer --working-dir=tools/php-cs-fixer update --classmap-authoritative",
+            "@composer --working-dir=tools/phpstan update --classmap-authoritative",
+            "@composer --working-dir=tools/psalm update --classmap-authoritative"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true,
+            "symfony/runtime": true
+        },
+        "platform": {
+            "php": "8.4.0"
+        },
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": true,
+            "require": "7.2.*"
+        }
+    }
+}

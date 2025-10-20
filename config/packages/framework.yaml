@@ -1,0 +1,37 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
+framework:
+    secret: '%env(APP_SECRET)%'
+
+    # this defines the codes of the locales (languages) available in the application
+    # https://symfony.com/doc/current/reference/configuration/framework.html#enabled-locales
+    enabled_locales: ['bg', 'en']
+
+    # Note that the session will be started ONLY if you read or write from it.
+    session: true
+
+    # When using the HTTP Cache, ESI allows to render page fragments separately
+    # and with different cache configurations for each fragment
+    # https://symfony.com/doc/current/http_cache/esi.html
+    esi: true
+    fragments: true
+
+    http_client:
+        scoped_clients:
+            wiltec_manuals.client:
+                base_uri: '%env(WILTEC_MANUALS_API_BASE_URL)%'
+                timeout: 5
+
+            akeneo_products.client:
+                base_uri: '%env(AKENEO_API_BASE_URL)%'
+                timeout: 10
+            
+    cache:
+        pools:
+            manuals.cache:
+                adapter: cache.app
+
+when@test:
+    framework:
+        test: true
+        session:
+            storage_factory_id: session.storage.factory.mock_file

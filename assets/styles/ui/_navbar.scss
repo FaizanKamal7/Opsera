@@ -1,0 +1,22 @@
+@media (min-width: 992px) {
+    .navbar-vertical.navbar-expand-lg {
+        width: 20rem;
+    }
+    .navbar-expand-lg.navbar-vertical~.navbar,.navbar-expand-lg.navbar-vertical~.page-wrapper {
+        margin-left: 20rem
+    }
+    .navbar-expand-lg.navbar-vertical.navbar-right~.navbar,.navbar-expand-lg.navbar-vertical.navbar-right~.page-wrapper {
+        margin-right: 20rem
+    }
+}
+
+.navbar {
+    &.navbar-vertical {
+        .navbar-brand {
+            > .app-version-tag {
+                font-size: 0.7rem;
+                color: var(--tblr-navbar-color);
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+<div{{ attributes }}>
+    <div class="alert alert-{{ type }} alert-dismissible d-flex align-items-center py-2 pe-3 ps-2" role="alert">
+        <!-- Icon -->
+        <div class="alert-icon pe-2 d-flex align-items-center">
+            <i class="fa-solid {{ this.getIcon() }}"></i>
+        </div>
+
+        <!-- Text Section -->
+        <div class="alert-content flex-grow-1 pe-2 d-flex flex-column justify-content-center">
+            <h4 class="alert-heading mb-0">{{ message }}</h4>
+            {% if sub_message %}
+            <div class="alert-description small mt-1">{{ sub_message }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Close Button - Perfectly centered -->
+        <button type="button" class="btn-close p-1 flex-shrink-0 d-flex align-items-center justify-content-center"
+            data-bs-dismiss="alert" aria-label="Close" style="height: 100%;">
+        </button>
+    </div>
+    </div>

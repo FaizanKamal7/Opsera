@@ -1,0 +1,64 @@
+services:
+  php:
+    image: ${IMAGES_PREFIX:-}smartflow-php
+    depends_on:
+        database:
+            condition: service_healthy
+            restart: true
+    restart: unless-stopped
+    tty: true
+    env_file:
+      - path: ./.env
+        required: true
+      - path: ./.env.local
+        required: false
+      - path: ./.docker.env
+        required: true
+      - path: ./.docker.env.local
+        required: false
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+      - .:/var/www
+      - ./assets:/var/www/assets
+    environment:
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
+#   --- Commented below for windows
+#    entrypoint: [ "/usr/local/bin/php", "frankenphp", "run" ]
+
+  database:
+    image: mysql:8.0-debian
+    platform: linux/amd64
+    environment:
+      - MYSQL_DATABASE=${DB_NAME?}
+      - MYSQL_USER=${DB_USER?}
+      - MYSQL_PASSWORD=${DB_PASSWORD?}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD?}
+      - TZ=${TZ?}
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      # HTTP
+      - target: 3306
+        published: ${DB_PORT:-3306}
+        protocol: tcp
+    restart: unless-stopped
+    init: true
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD || exit 1
+      timeout: 1s
+      retries: 30
+      interval: 10s
+      start_period: 10s
+
+# Mercure is installed as a Caddy module, prevent the Flex recipe from installing another service
+###> symfony/mercure-bundle ###
+###< symfony/mercure-bundle ###
+
+volumes:
+  caddy_data:
+  caddy_config:
+  db_data:
+###> symfony/mercure-bundle ###
+###< symfony/mercure-bundle ###

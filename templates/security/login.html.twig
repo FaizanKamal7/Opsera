@@ -1,0 +1,27 @@
+{% extends '@theme/security.html.twig' %}
+
+{% block logo_login %}
+<a href="/">
+    <img src="{{asset('images/logo_white_bg.png')}}" width="10rem" height="10rem" alt="Wiltec"
+        class="navbar-brand-image">
+</a>
+{% endblock %}
+
+{% block login_box_msg %}Login to your account{% endblock %}
+
+{% block csrf_token %}
+<input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}" />
+{% endblock %}
+
+{% block login_form_end %}
+<input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}" />
+{% endblock %}
+
+{% block registration %}
+{% endblock %}
+
+{% block password_forgotten %}
+{% endblock %}
+
+{% block login_social_auth %}
+{% endblock %}

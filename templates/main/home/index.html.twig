@@ -1,0 +1,28 @@
+{% extends 'main/layouts/master.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block page_content_header %}
+    <section class="hero" style="--hero-bg: url('{{ asset('images/static/home_cover.jpg') }}')">
+        {{ component('SearchInput') }}
+    </section>
+
+{% endblock page_content_header %}
+
+{% block page_content %}
+    <section class="home-content">
+        {% if is_loading() %}
+            <div class="global-loader">
+                <div class="global-loader__spinner"></div>
+                <div class="global-loader__text">Loading...</div>
+            </div>
+        {% endif %}
+        <h2>Willkommen in unserem Wiltec Service-Portal</h2>
+        <p>
+            Ob Bedienungsanleitungen, technische Informationen oder produktspezifische Daten – in unserem Service-Portal
+            werden Sie fündig. Geben Sie einfach die Artikelnummer, den Produktnamen oder die EAN ein.
+        </p>
+    </section>
+    {{ component('SearchResult') }}
+
+{% endblock page_content %}

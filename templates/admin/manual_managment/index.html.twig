@@ -1,0 +1,199 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manual Managment{% endblock %}
+
+{% block page_content %}
+<style>
+    .title-column {
+        width: 20%;
+        /* Adjust this value as needed */
+    }
+
+    .title-cell {
+        max-width: 200px;
+        /* Adjust this value as needed */
+        white-space: normal;
+        word-wrap: break-word;
+    }
+</style>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <h3 class="mb-0">Manuals</h3>
+
+        <div class="d-flex align-items-center gap-3">
+            <form action="{{ path('app_manual_managment') }}" method="get" autocomplete="off" novalidate class="mb-0">
+                <div class="input-icon">
+                    <span class="input-icon-addon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-1">
+                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
+                            <path d="M21 21l-6 -6"></path>
+                        </svg>
+                    </span>
+                    <input type="text" name="search" value="{{ searchTerm }}" class="form-control" placeholder="Search…"
+                        aria-label="Search manuals">
+                </div>
+            </form>
+            <button type="button" class="btn btn-cyan" data-bs-toggle="modal" data-bs-target="#addManualModel">
+                Add Manual
+            </button>
+
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <div class="card-body p-0">
+            <div id="table-default" class="table-responsive">
+                <!-- Bulk Delete Form -->
+                <form method="post" action="{{ path('app_manuals_bulk_delete') }}"
+                    onsubmit="return confirm('Are you sure you want to delete the selected manuals?');">
+                    {% set selected = app.request.query.get('manualIds') is not empty %}
+                    {% if selected %}
+                    <button type="submit" class="btn btn-danger">Delete Selected</button>
+                    {% endif %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" id="select-all">
+                                </th>
+                                <th class="title-column">
+                                    <button class="table-sort" data-sort="sort-title">Title</button>
+                                </th>
+                                <th>
+                                    <button class="table-sort" data-sort="sort-url">URL</button>
+                                </th>
+                                <th>
+                                    <button class="table-sort" data-sort="sort-url">HASH</button>
+                                </th>
+                                <th>
+                                    <button class="table-sort" data-sort="sort-clicks">Clicks</button>
+                                </th>
+                                <th>
+                                    <button class="table-sort" data-sort="sort-ip">Last accessed IP</button>
+                                </th>
+                                <th>
+                                    <button class="table-sort desc" data-sort="sort-timestamp">Last Modified</button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-tbody">
+                            {% for manual in paginator %}
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="manualIds[]" value="{{ manual.keyword }}">
+                                </td>
+                                <td class="sort-title title-cell">
+                                    {{ manual.title }}
+                                    <br>
+                                    <u> <a href="{{ manual.url }}" target="_blank">{{ manual.url }}</a> </u>
+                                </td>
+                                <td class="sort-url">
+                                    <a href="{{ path('app_manual_view', {'hash': manual.keyword}) }}"
+                                        target="_blank">View Manual</a>
+                                </td>
+                                <td class="sort-title title-cell">{{ manual.keyword }}</td>
+                                <td class="sort-clicks">{{ manual.clicks }}</td>
+                                <td class="sort-ip">{{ manual.ip }}</td>
+                                <td class="sort-timestamp">{{ manual.timestamp|date('Y-m-d H:i:s') }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="7">No manuals found.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="card-footer d-flex align-items-center">
+                        <p class="m-0 text-secondary">
+                            Showing <span>{{ paginator.getCurrentPage() * paginator.getItemsPerPage() -
+                                paginator.getItemsPerPage() + 1 }}</span>
+                            to <span>{{ min(paginator.getCurrentPage() * paginator.getItemsPerPage(),
+                                paginator.getTotalItems()) }}</span>
+                            of <span>{{ paginator.getTotalItems() }}</span> entries
+                        </p>
+
+                        <ul class="pagination m-0 ms-auto">
+                            <li class="page-item {{ paginator.getCurrentPage() == 1 ? 'disabled' : '' }}">
+                                <a class="page-link"
+                                    href="{{ path('app_manual_managment', {page: paginator.getCurrentPage() - 1, search: searchTerm}) }}"
+                                    tabindex="{{ paginator.getCurrentPage() == 1 ? '-1' : '' }}"
+                                    aria-disabled="{{ paginator.getCurrentPage() == 1 ? 'true' : 'false' }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="icon icon-1">
+                                        <path d="M15 6l-6 6l6 6"></path>
+                                    </svg>
+                                    prev
+                                </a>
+                            </li>
+
+                            {% set lastPage = paginator.getLastPage() %}
+                            {% set currentPage = paginator.getCurrentPage() %}
+
+                            {% for i in 1..lastPage %}
+                            {% if i <= 3 or i> lastPage - 3 or (i >= currentPage - 1 and i <= currentPage + 1) %} <li
+                                    class="page-item {{ i == currentPage ? 'active' : '' }}">
+                                    <a class="page-link"
+                                        href="{{ path('app_manual_managment', { page: i, search: searchTerm }) }}">
+                                        {{ i }}
+                                    </a>
+                                    </li>
+                                    {% elseif i == 4 or i == lastPage - 3 %}
+                                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                                    {% endif %}
+                                    {% endfor %}
+
+                                    <li
+                                        class="page-item {{ paginator.getCurrentPage() == paginator.getLastPage() ? 'disabled' : '' }}">
+                                        <a class="page-link"
+                                            href="{{ path('app_manual_managment', {page: paginator.getCurrentPage() + 1, search: searchTerm}) }}">
+                                            next
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+                                                <path d="M9 6l6 6l-6 6"></path>
+                                            </svg>
+                                        </a>
+                                    </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="addManualModel" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <twig:AddManualModel />
+    </div>
+</div>
+{% endblock %}
+
+
+
+{% block javascripts %}
+//
+<script>
+    //     document.addEventListener("DOMContentLoaded", function () {
+    //         const simpleType = document.getElementById("simpleType");
+    //         const advancedType = document.getElementById("advancedType");
+    //         const simpleCard = document.getElementById("simpleCard");
+    //         const advancedCard = document.getElementById("advancedCard");
+
+    //         function toggleCards() {
+    //             if (simpleType.checked) {
+    //                 simpleCard.classList.remove("d-none");
+    //                 advancedCard.classList.add("d-none");
+    //             } else {
+    //                 simpleCard.classList.add("d-none");
+    //                 advancedCard.classList.remove("d-none");
+    //             }
+    //         }
+
+    //         simpleType.addEventListener("change", toggleCards);
+    //         advancedType.addEventListener("change", toggleCards);
+    //     });
+    // </script>
+{% endblock %}

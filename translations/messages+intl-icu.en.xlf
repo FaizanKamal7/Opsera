@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="_RBPUof" resname="homepage">
+        <source>homepage</source>
+        <target>Home</target>
+      </trans-unit>
+      <trans-unit id="UmeJHDN" resname="http_error.name">
+        <source>http_error.name</source>
+        <target>Error {status_code, number}</target>
+      </trans-unit>
+      <trans-unit id="SCjzdE1" resname="http_error.description">
+        <source>http_error.description</source>
+        <target>There was an unknown error (HTTP {status_code, number}) that prevented to complete your request.</target>
+      </trans-unit>
+      <trans-unit id="RKFQtz9" resname="http_error.suggestion">
+        <source>http_error.suggestion</source>
+        <target><![CDATA[Try loading this page again in some minutes or <a href="{url}">go back to the homepage</a>.]]></target>
+      </trans-unit>
+      <trans-unit id="pxvXYat" resname="http_error_403.description">
+        <source>http_error_403.description</source>
+        <target>You don't have permission to access to this resource.</target>
+      </trans-unit>
+      <trans-unit id="EXqbVXq" resname="http_error_403.suggestion">
+        <source>http_error_403.suggestion</source>
+        <target>Ask your manager or system administrator to grant you access to this resource.</target>
+      </trans-unit>
+      <trans-unit id=".zK3_xt" resname="http_error_404.description">
+        <source>http_error_404.description</source>
+        <target>We couldn't find the page you requested.</target>
+      </trans-unit>
+      <trans-unit id="Bf.fwkH" resname="http_error_404.suggestion">
+        <source>http_error_404.suggestion</source>
+        <target><![CDATA[Check out any misspelling in the URL or <a href="{url}">go back to the homepage</a>.]]></target>
+      </trans-unit>
+      <trans-unit id="5P2XiOi" resname="http_error_500.description">
+        <source>http_error_500.description</source>
+        <target>There was an internal server error.</target>
+      </trans-unit>
+      <trans-unit id="qDBV.z_" resname="http_error_500.suggestion">
+        <source>http_error_500.suggestion</source>
+        <target><![CDATA[Try loading this page again in some minutes or <a href="{url}">go back to the homepage</a>.]]></target>
+      </trans-unit>
+      <trans-unit id="Fm3PJmt" resname="Open personal menu">
+        <source>Open personal menu</source>
+        <target>Open personal menu</target>
+      </trans-unit>
+      <trans-unit id="rPENuxy" resname="Sign out">
+        <source>Sign out</source>
+        <target>Sign out</target>
+      </trans-unit>
+      <trans-unit id="F_O6_sI" resname="title.user_profile">
+        <source>title.user_profile</source>
+        <target>My profile</target>
+      </trans-unit>
+      <trans-unit id="2LD_ivf" resname="title.change_password">
+        <source>title.change_password</source>
+        <target>Change password</target>
+      </trans-unit>
+      <trans-unit id="2q0mCJg" resname="action.save_changes">
+        <source>action.save_changes</source>
+        <target>Save changes</target>
+      </trans-unit>
+      <trans-unit id="80bO76v" resname="action.save">
+        <source>action.save</source>
+        <target>Save changes</target>
+      </trans-unit>
+      <trans-unit id="zSYrwPI" resname="action.submit">
+        <source>action.submit</source>
+        <target>Submit</target>
+      </trans-unit>
+      <trans-unit id="wPEuKmL" resname="action.cancel">
+        <source>action.cancel</source>
+        <target>Cancel</target>
+      </trans-unit>
+      <trans-unit id="3bCUfe8" resname="action.change_password">
+        <source>action.change_password</source>
+        <target>Change password</target>
+      </trans-unit>
+      <trans-unit id="6ta.Ukc" resname="label.username">
+        <source>label.username</source>
+        <target>Username</target>
+      </trans-unit>
+      <trans-unit id="N9lph3Q" resname="label.fullname">
+        <source>label.fullname</source>
+        <target>Fullname</target>
+      </trans-unit>
+      <trans-unit id="ykW6lkh" resname="label.email">
+        <source>label.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="Ogsv.lD" resname="label.language">
+        <source>label.language</source>
+        <target>Language</target>
+      </trans-unit>
+      <trans-unit id="yaiKGee" resname="label.password">
+        <source>label.password</source>
+        <target>Password</target>
+      </trans-unit>
+      <trans-unit id="VFWIDIH" resname="label.remember_me">
+        <source>label.remember_me</source>
+        <target>Keep me logged in</target>
+      </trans-unit>
+      <trans-unit id="9c4z0Po" resname="label.current_password">
+        <source>label.current_password</source>
+        <target>Current password</target>
+      </trans-unit>
+      <trans-unit id="oyd10Po" resname="label.new_password">
+        <source>label.new_password</source>
+        <target>New password</target>
+      </trans-unit>
+      <trans-unit id="Af_AUtA" resname="label.new_password_confirm">
+        <source>label.new_password_confirm</source>
+        <target>Confirm password</target>
+      </trans-unit>
+      <trans-unit id="Gj4Ca1d" resname="label.role">
+        <source>label.role</source>
+        <target>Role</target>
+      </trans-unit>
+      <trans-unit id="nSbG6xa" resname="ui.datagrid.batch_actions.select_all">
+        <source>ui.datagrid.batch_actions.select_all</source>
+        <target>Select all</target>
+      </trans-unit>
+      <trans-unit id="AELRp5e" resname="ui.datagrid.no_result">
+        <source>ui.datagrid.no_result</source>
+        <target>No result</target>
+      </trans-unit>
+      <trans-unit id="D82cip3" resname="ui.datagrid.pagination.all_items">
+        <source>ui.datagrid.pagination.all_items</source>
+        <target>All</target>
+      </trans-unit>
+      <trans-unit id="1VDAq3Z" resname="ui.datagrid.column.boolean.true">
+        <source>ui.datagrid.column.boolean.true</source>
+        <target>Yes</target>
+      </trans-unit>
+      <trans-unit id="ptpKpCu" resname="ui.datagrid.column.boolean.false">
+        <source>ui.datagrid.column.boolean.false</source>
+        <target>No</target>
+      </trans-unit>
+      <trans-unit id="0i6zU3z" resname="ui.datagrid.pagination.previous">
+        <source>ui.datagrid.pagination.previous</source>
+        <target>previous</target>
+      </trans-unit>
+      <trans-unit id="AFEQZHN" resname="ui.datagrid.pagination.next">
+        <source>ui.datagrid.pagination.next</source>
+        <target>next</target>
+      </trans-unit>
+      <trans-unit id="SZBL2XL" resname="ui.datagrid.pagination.records_count">
+        <source>ui.datagrid.pagination.records_count</source>
+        <target>{count, plural, =0 {No records} =1 {One record} other {# records}}</target>
+      </trans-unit>
+      <trans-unit id="3YhWFK3" resname="title.users_index">
+        <source>title.users_index</source>
+        <target>Users</target>
+      </trans-unit>
+        <trans-unit id="3YhWFK4" resname="title.url_shortner">
+        <source>title.url_shortner</source>
+        <target>URL Shortner</target>
+      </trans-unit>
+      <trans-unit id="mpHDX6N" resname="Administration">
+        <source>Administration</source>
+        <target>Administration</target>
+      </trans-unit>
+      <trans-unit id="mGry.7f" resname="Is equal to">
+        <source>Is equal to</source>
+        <target>Is equal to</target>
+      </trans-unit>
+      <trans-unit id="485OguK" resname="Is not equal to">
+        <source>Is not equal to</source>
+        <target>Is not equal to</target>
+      </trans-unit>
+      <trans-unit id="vM6jhE3" resname="Is null">
+        <source>Is null</source>
+        <target>Is null</target>
+      </trans-unit>
+      <trans-unit id="D8trc_5" resname="Is not null">
+        <source>Is not null</source>
+        <target>Is not null</target>
+      </trans-unit>
+      <trans-unit id="8_0PBhZ" resname="Is lower than">
+        <source>Is lower than</source>
+        <target>Is lower than</target>
+      </trans-unit>
+      <trans-unit id="iaYcqii" resname="Is lower then or equal">
+        <source>Is lower then or equal</source>
+        <target>Is lower then or equal</target>
+      </trans-unit>
+      <trans-unit id="FM7r9sI" resname="Is greater than">
+        <source>Is greater than</source>
+        <target>Is greater than</target>
+      </trans-unit>
+      <trans-unit id="EGWr34k" resname="Is greater than or equal">
+        <source>Is greater than or equal</source>
+        <target>Is greater than or equal</target>
+      </trans-unit>
+      <trans-unit id="EmVTiTe" resname="Is empty">
+        <source>Is empty</source>
+        <target>Is empty</target>
+      </trans-unit>
+      <trans-unit id="G8DmLxC" resname="Is not empty">
+        <source>Is not empty</source>
+        <target>Is not empty</target>
+      </trans-unit>
+      <trans-unit id="IrK4Jg7" resname="Is starting with">
+        <source>Is starting with</source>
+        <target>Is starting with</target>
+      </trans-unit>
+      <trans-unit id="ZF5yxHT" resname="Is not starting with">
+        <source>Is not starting with</source>
+        <target>Is not starting with</target>
+      </trans-unit>
+      <trans-unit id="THQPY9u" resname="Is ending with">
+        <source>Is ending with</source>
+        <target>Is ending with</target>
+      </trans-unit>
+      <trans-unit id="omr2kyD" resname="Is not ending with">
+        <source>Is not ending with</source>
+        <target>Is not ending with</target>
+      </trans-unit>
+      <trans-unit id="RXk3ErM" resname="Contains">
+        <source>Contains</source>
+        <target>Contains</target>
+      </trans-unit>
+      <trans-unit id="NdrD7Du" resname="Does not contain">
+        <source>Does not contain</source>
+        <target>Does not contain</target>
+      </trans-unit>
+      <trans-unit id="37wivZ3" resname="ID">
+        <source>ID</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="VhxhtYo" resname="Username">
+        <source>Username</source>
+        <target>Username</target>
+      </trans-unit>
+      <trans-unit id="i9.ArB8" resname="Full name">
+        <source>Full name</source>
+        <target>Full name</target>
+      </trans-unit>
+      <trans-unit id="wVFHuss" resname="Role">
+        <source>Role</source>
+        <target>Role</target>
+      </trans-unit>
+      <trans-unit id="JjO6Nuw" resname="Active">
+        <source>Active</source>
+        <target>Active</target>
+      </trans-unit>
+      <trans-unit id="ybqiXt5" resname="Inactive">
+        <source>Inactive</source>
+        <target>Inactive</target>
+      </trans-unit>
+      <trans-unit id="5q6OTdQ" resname="Language">
+        <source>Language</source>
+        <target>Language</target>
+      </trans-unit>
+      <trans-unit id="kIqhHtP" resname="Admin">
+        <source>Admin</source>
+        <target>Admin</target>
+      </trans-unit>
+      <trans-unit id="p7g8gzA" resname="Super admin">
+        <source>Super admin</source>
+        <target>Super admin</target>
+      </trans-unit>
+      <trans-unit id="TkiKoB6" resname="User">
+        <source>User</source>
+        <target>User</target>
+      </trans-unit>
+      <trans-unit id="gzEusjk" resname="Loading...">
+        <source>Loading...</source>
+        <target>Loading...</target>
+      </trans-unit>
+      <trans-unit id="wTXq9lp" resname="app.actions.edit.imp">
+        <source>app.actions.edit.imp</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="rkVXwCn" resname="app.actions.edit.noun">
+        <source>app.actions.edit.noun</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="dRNHWgg" resname="Activate">
+        <source>Activate</source>
+        <target>Activate</target>
+      </trans-unit>
+      <trans-unit id="S5P7nQd" resname="Deactivate">
+        <source>Deactivate</source>
+        <target>Deactivate</target>
+      </trans-unit>
+      <trans-unit id="ap5cmeq" resname="Apply">
+        <source>Apply</source>
+        <target>Apply</target>
+      </trans-unit>
+      <trans-unit id="D9gsTac" resname="ui.datagrid.row.actions.remove.confirm">
+        <source>ui.datagrid.row.actions.remove.confirm</source>
+        <target>Do you want to remove the selected row?</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

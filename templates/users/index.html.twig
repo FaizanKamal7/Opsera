@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% import '@theme/components/buttons.html.twig' as buttons %}
+
+{% block page_title %} {{ 'title.users_index'|trans }} {% endblock %}
+{% block page_pretitle %} {{ 'Administration'|trans }} {% endblock %}
+
+{% block page_actions %}
+    <div class="btn-list">
+        {{ buttons.link_button('Add user', path('app_users_add'), 'fas fa-user-plus', 'primary') }}
+    </div>
+{% endblock %}
+
+{% block page_content %}
+    <twig:UsersDataGrid />
+{% endblock %}

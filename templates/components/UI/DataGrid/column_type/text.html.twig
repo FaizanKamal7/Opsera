@@ -1,0 +1,9 @@
+{% set value = column.value(item) %}
+{% set truncate = params.truncate|default(0)  %}
+{% set value = truncate == 0 ? value : value|u.truncate(truncate, '...') %}
+
+{% if params.escape ?? true %}
+    {{ value }}
+{% else %}
+    {{ value|raw }}
+{% endif %}

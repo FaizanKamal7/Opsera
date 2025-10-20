@@ -1,0 +1,184 @@
+{% set header_tr_class = block('grid_header_tr_class') is defined ? block('grid_header_tr_class') : '' %}
+{% set rowActionsGroupCount = grid.RowActionsGroupCount %}
+{% set table_cols = grid.visibleColumns|length + ( grid.hasBatchActions ? 1 : 0 ) + rowActionsGroupCount %}
+{% if grid.hasBatchActions %}
+<form name="datagrid-batch-action" method="{{ grid.batchMethod }}" action="" onsubmit="this.parentElement.querySelector('.loading-state-container').style.display = 'block';">
+    <input type="hidden" name="_token" value="{{ csrf_token(grid.batchActionsTokenId) }}">
+    <!-- Prevent implicit submission of the form -->
+    <button type="submit" disabled style="display: none" aria-hidden="true"></button>
+{% endif %}
+<div class="card">
+    <div class="loading-state-container" data-loading="show">
+        <div class="loading-overlay page page-center" >
+            <div class="container container-slim py-4">
+                <div class="text-center">
+                    <div class="text-secondary mb-3">{{ 'Loading...'|trans }}</div>
+                    <div class="progress progress-sm">
+                        <div class="progress-bar progress-bar-indeterminate"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="background"></div>
+        </div>
+    </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="{% block grid_table_class %}table table-condensed table-bordered table-striped table-hover{% endblock %}" >
+                    <thead data-skip-morph>
+                    <tr{% if header_tr_class is not empty %} class="{{ header_tr_class }}"{% endif %}>
+                        {% if grid.hasBatchActions %}
+                            <th class="p-0 position-relative" style="width: 40px !important; min-width: 40px !important;">
+                                <label class="d-flex justify-content-center align-items-center cursor-pointer" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
+                                    <input type="checkbox" data-ui--datagrid-target="master" title="{{ 'ui.datagrid.batch_actions.select_all'|trans }}" class="cursor-pointer" />
+                                </label>
+                            </th>
+                        {% endif %}
+                        {% for column in grid.visibleColumns %}
+                            {% set th_class = block('grid_header_th_class') is defined ? block('grid_header_th_class') : '' %}
+                            {% if column.param('col_class') is not null %}
+                                {% set th_class = th_class ~ ' ' ~ column.param('col_class') %}
+                            {% endif %}
+                            <th {% if column.width is not null %} style="width: {{ column.width }}px !important;" {% endif %} class="{% if th_class is not empty %}{{ th_class }}{% endif %}">
+                                {% if column.sortable %}
+                                    <button type="button" data-ui--datagrid-target="sortable" data-field-name="{{ column.field }}" class="table-sort {{ query.sortDir(column.field) }}">
+                                        {{ column.name }}{% if query.SortCount > 1 %} {{ query.SortNum(column.field) > 0 ? '(' ~ query.SortNum(column.field) ~ ')' : '' }} {% endif %}
+                                    </button>
+                                {% else %}
+                                    {{ column.name }}
+                                {% endif %}
+                            </th>
+                        {% endfor %}
+                        {% if rowActionsGroupCount > 0 %}
+                            <th class="row-action-group-header" colspan="{{ rowActionsGroupCount }}">&nbsp;</th>
+                        {% endif %}
+                    </tr>
+                    {% if grid.isFilterEnabled %}
+                    <tr class="filter-row">
+                        {% if grid.hasBatchActions %}
+                            <th></th>
+                        {% endif %}
+                        {% for column in grid.visibleColumns %}
+                            {% if column.filterable %}
+                                {% set columnIsFiltered = query.fieldFilters(column.field)|length > 0 %}
+                                {% set columnIsComplexFilter = columnIsFiltered and query.fieldFilters(column.field)|length > 1 %}
+                                <th>
+                                    <div class="input-group">
+                                        {% if columnIsComplexFilter %}
+                                            <input type="text" class="form-control" value="{{ query.fieldExpression(column.field) }}" readonly>
+                                        {% else %}
+                                            {% if column.values|length > 0 %}
+                                                <select
+                                                    data-model="on(change)|columnFilterValue.{{ column.field }}"
+                                                    class="form-select"
+                                                >
+                                                    <option value=""></option>
+                                                    {% for item in column.valuesList %}
+                                                        <option value="{{ item.value }}">{{ item.text }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            {% else %}
+                                                <input
+                                                    data-model="on(change)|columnFilterValue.{{ column.field }}"
+                                                    type="text" class="form-control"
+                                                >
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if columnIsFiltered %}
+                                            <button
+                                                data-action="live#action"
+                                                data-live-action-param="columnResetFilter"
+                                                data-live-field-param="{{ column.field }}"
+                                                type="button" class="btn filter-reset text-muted" tabindex="-1"
+                                            >
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        {% elseif not column.getParam('hide_column_filter_operator', false) %}
+                                            <button class="btn filter-type-dropdown dropdown-toggle text-muted d-none d-lg-block" type="button" data-bs-toggle="dropdown" aria-expanded="false" tabindex="-1"><i class="fa fa-filter"></i></button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                {% for filter in column.filterOperatorsList %}
+                                                    <label class="dropdown-item">
+                                                        <input
+                                                            data-model="columnFilterOperator.{{ column.field }}"
+                                                            name="{{ this.uid ~ '_fo_' ~ column.field }}"
+                                                            value="{{ filter.operator }}"
+                                                            class="form-check-input m-0 me-2" type="radio"
+                                                        >{{ filter.name|trans }}
+                                                    </label>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                    </div>
+                                </th>
+                            {% endif %}
+                        {% endfor %}
+                        {% if rowActionsGroupCount > 0 %}
+                            <th colspan="{{ rowActionsGroupCount }}">&nbsp;</th>
+                        {% endif %}
+                    </tr>
+                    {% endif %}
+                    </thead>
+                    <tbody>
+                    {% if grid.dataSource.isEmpty %}
+                        <tr>
+                            <td colspan="{{ table_cols }}">
+                                <p class="alert alert-info m-0">{{ 'ui.datagrid.no_result'|trans }}</p>
+                            </td>
+                        </tr>
+                    {% else %}
+                        {% for item in grid.dataSource.iterator %}
+                            <tr{{ grid.rowAttributes(item)|raw }}>
+                                {% if grid.hasBatchActions %}
+                                    <td class="p-0 position-relative">
+                                        <label class="d-flex justify-content-center align-items-center cursor-pointer" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
+                                            <input type="checkbox" name="ids[]" value="{{ item.id }}" data-ui--datagrid-target="checkbox" class="cursor-pointer" />
+                                        </label>
+                                    </td>
+                                {% endif %}
+                                {% for column in grid.visibleColumns %}
+                                    <td {% if column.param('col_class') is not null %}class="{{ column.param('col_class') }}"{% endif %}>
+                                        {% include 'components/UI/DataGrid/_column_value.html.twig' %}
+                                    </td>
+                                {% endfor %}
+                                {% for rowActionsGroup in grid.rowActions(item) %}
+                                    <td class="row-action-group p-1">
+                                        {% include ['components/UI/DataGrid/column_type/actions.html.twig', grid.theme ~ '/column_type/actions.html.twig'] with {
+                                            'actions': rowActionsGroup,
+                                        } %}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            {% if grid.hasBatchActions %}
+            <div class="float-start d-inline-flex">
+                <div class="input-group input-group-sm me-3">
+                    <select onchange="this.closest('form').action = this.value" class="form-select ps-2">
+                        <option value=""></option>
+                        {% for batchAction in grid.batchActions %}
+                            <option value="{{ batchAction.url }}">{{ batchAction.label }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn" style="min-width: 70px; padding: 6px;">{{ 'Apply'|trans }}</button>
+                </div>
+            </div>
+            {% endif %}
+            <div class="float-end d-inline-flex">
+                <div class="border-end border-muted pe-3 me-2">
+                    <select class="form-select form-select-sm p-2 pe-5 pt-1 pb-1 pagination-items-per-page" data-model="itemsPerPage" data-value="{{ this.itemsPerPage }}" style="min-width: 80px; padding: 4px 8px 5px 8px !important;">
+                        {% for pageSizeOpt in [10, 25, 50, 100, 250, 500] %}
+                            <option value="{{ pageSizeOpt }}" {{ pageSizeOpt == this.itemsPerPage ? 'selected' : '' }}>{{ pageSizeOpt }}</option>
+                        {% endfor %}
+                        <option value="0">{{ 'ui.datagrid.pagination.all_items'|trans }}</option>
+                    </select>
+                </div>
+                <twig:UI:Pagination :currentPage="currentPage" :itemsPerPage="itemsPerPage" :totalItems="grid.dataSource.totalCount" :showTotalItems="true" />
+            </div>
+            <div class="clearfix"></div>
+        </div>
+</div>
+{% if grid.hasBatchActions %}</form>{% endif %}

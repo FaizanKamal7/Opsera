@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" target-language="bg" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="FC.YH9X" resname="Toggle navigation">
+        <source>Toggle navigation</source>
+        <target>Превключване на навигацията</target>
+      </trans-unit>
+      <trans-unit id="lk7.A5I" resname="Toggle visibility">
+        <source>Toggle visibility</source>
+        <target>Превключване на видимостта</target>
+      </trans-unit>
+      <trans-unit id="UxATTnp" resname="Remember Me">
+        <source>Remember Me</source>
+        <target>Запомни ме</target>
+      </trans-unit>
+      <trans-unit id="mydaruh" resname="Sign in to start your session">
+        <source>Sign in to start your session</source>
+        <target state="final">Вход</target>
+      </trans-unit>
+      <trans-unit id="hXquTtV" resname="Sign In">
+        <source>Sign In</source>
+        <target state="translated">Вход</target>
+      </trans-unit>
+      <trans-unit id="rPENuxy" resname="Sign out">
+        <source>Sign out</source>
+        <target state="translated">Изход</target>
+      </trans-unit>
+      <trans-unit id="fGfBzt6" resname="Register">
+        <source>Register</source>
+        <target>Регистриране</target>
+      </trans-unit>
+      <trans-unit id="5Y34z39" resname="Profile">
+        <source>Profile</source>
+        <target>Твоят профил</target>
+      </trans-unit>
+      <trans-unit id="jrWyXj5" resname="Member since %date%">
+        <source>Member since %date%</source>
+        <target>Член от %date%</target>
+      </trans-unit>
+      <trans-unit id="VhxhtYo" resname="Username">
+        <source>Username</source>
+        <target>Потребителско име</target>
+      </trans-unit>
+      <trans-unit id="pnIL5_5" resname="Username or email address">
+        <source>Username or email address</source>
+        <target>Потребителско име или ел. поща</target>
+      </trans-unit>
+      <trans-unit id="GqmFSHc" resname="Password">
+        <source>Password</source>
+        <target>Парола</target>
+      </trans-unit>
+      <trans-unit id="M0fZiKb" resname="Show homepage">
+        <source>Show homepage</source>
+        <target>Покажи началната страница</target>
+      </trans-unit>
+      <trans-unit id="mR7n673" resname="Back to login">
+        <source>Back to login</source>
+        <target>Обратно към входа</target>
+      </trans-unit>
+      <trans-unit id="eyayNGN" resname="Reset your password">
+        <source>Reset your password</source>
+        <target>Нулиране на паролата ти</target>
+      </trans-unit>
+      <trans-unit id="TOKgeba" resname="I forgot my password">
+        <source>I forgot my password</source>
+        <target>Забравих паролата си</target>
+      </trans-unit>
+      <trans-unit id="numUiTK" resname="Register a new account">
+        <source>Register a new account</source>
+        <target>Регистриране на нов акаунт</target>
+      </trans-unit>
+      <trans-unit id="XQ1O2B6" resname="View all">
+        <source>View all</source>
+        <target>Виж всичко</target>
+      </trans-unit>
+      <trans-unit id="ShsvRnf" resname="or">
+        <source>or</source>
+        <target>или</target>
+      </trans-unit>
+      <trans-unit id="4mS2ljv" resname="You have %count% notifications">
+        <source>You have %count% notifications</source>
+        <target state="needs-translation">Имаш 1 уведомление|Имаш %count% уведомления</target>
+      </trans-unit>
+      <trans-unit id="ks8a08E" resname="You have %count% messages">
+        <source>You have %count% messages</source>
+        <target>Имаш 1 съобщение|Имаш %count% съобщения</target>
+      </trans-unit>
+      <trans-unit id="ToV7mTZ" resname="You have %count% tasks">
+        <source>You have %count% tasks</source>
+        <target>Имаш 1 задача|Имаш %count% задачи</target>
+      </trans-unit>
+      <trans-unit id="GFTY2Xr" resname="%progress%% Complete">
+        <source>%progress%% Complete</source>
+        <target>%progress%% завършено</target>
+      </trans-unit>
+      <trans-unit id="eX4.d9k" resname="This is a mandatory field">
+        <source>This is a mandatory field</source>
+        <target>Това е задължително поле</target>
+      </trans-unit>
+      <trans-unit id="CCxlA8E" resname="registration.confirmed">
+        <source>registration.confirmed</source>
+        <target>Поздравления %username%, твоят акаунт е активиран.</target>
+      </trans-unit>
+      <trans-unit id="qNghuqo" resname="Close">
+        <source>Close</source>
+        <target>Затвори</target>
+      </trans-unit>
+      <trans-unit id="CNfM3hi" resname="Take me home">
+        <source>Take me home</source>
+        <target>Отведи ме в началото</target>
+      </trans-unit>
+      <trans-unit id="nl_XePN" resname="http_error.title">
+        <source>http_error.title</source>
+        <target>Грешка</target>
+      </trans-unit>
+      <trans-unit id="SCjzdE1" resname="http_error.description">
+        <source>http_error.description</source>
+        <target>Нещо се обърка</target>
+      </trans-unit>
+      <trans-unit id="RKFQtz9" resname="http_error.suggestion">
+        <source>http_error.suggestion</source>
+        <target>Възникна критична грешка, моля опитай отново. Възможно е да си се натъкнал на софтуерен проблем, моля обърни се към твоя системен администратор, ако проблема продължи.</target>
+      </trans-unit>
+      <trans-unit id=".zK3_xt" resname="http_error_404.description">
+        <source>http_error_404.description</source>
+        <target>Страницата не беше намерена</target>
+      </trans-unit>
+      <trans-unit id="Bf.fwkH" resname="http_error_404.suggestion">
+        <source>http_error_404.suggestion</source>
+        <target>Не успяхме да намерим страницата която търсиш. Моля върни се в началото и започни отново.</target>
+      </trans-unit>
+      <trans-unit id="pxvXYat" resname="http_error_403.description">
+        <source>http_error_403.description</source>
+        <target>Страницата е с ограничен достъп.</target>
+      </trans-unit>
+      <trans-unit id="EXqbVXq" resname="http_error_403.suggestion">
+        <source>http_error_403.suggestion</source>
+        <target>Съжаляваме, но нямаш достатъчни права за работа с избраната страница или дейност. Моля обърни се към системния администратор, ако мислиш че това е грешка.</target>
+      </trans-unit>
+      <trans-unit id="ouNrIYq" resname="Previous">
+        <source>Previous</source>
+        <target>Предишен</target>
+      </trans-unit>
+      <trans-unit id="gefhnBC" resname="Next">
+        <source>Next</source>
+        <target>Следващ</target>
+      </trans-unit>
+      <trans-unit id="VHx8Fpk" resname="Show notifications">
+        <source>Show notifications</source>
+        <target>Покажи уведомленията</target>
+      </trans-unit>
+      <trans-unit id="035iiiT" resname="You have no notification">
+        <source>You have no notification</source>
+        <target>Нямаш нови уведомления</target>
+      </trans-unit>
+      <trans-unit id="d3BtY9I" resname="And %count% more…">
+        <source>And %count% more…</source>
+        <target>И %count% повече…</target>
+      </trans-unit>
+      <trans-unit id="1_MZEgP" resname="Actions">
+        <source>Actions</source>
+        <target>Действия</target>
+      </trans-unit>
+      <trans-unit id="Fm3PJmt" resname="Open personal menu">
+        <source>Open personal menu</source>
+        <target>Отвори личното меню</target>
+      </trans-unit>
+      <trans-unit id="PVuB1wf" resname="Show password">
+        <source>Show password</source>
+        <target>Покажи паролата</target>
+      </trans-unit>
+      <trans-unit id="ApaPPIo" resname="Hide password">
+        <source>Hide password</source>
+        <target>Скрии паролата</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

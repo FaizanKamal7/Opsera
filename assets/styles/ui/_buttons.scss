@@ -1,0 +1,8 @@
+.btn {
+    &.btn-sm {
+        --tblr-btn-line-height: 1.3;
+        --tblr-btn-font-weight: var(--tblr-font-weight-normal);
+        --tblr-btn-font-size: 0.85rem;
+        --tblr-btn-padding-x: 0.5rem;
+    }
+}

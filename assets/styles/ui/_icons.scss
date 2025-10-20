@@ -1,0 +1,22 @@
+.icon {
+    &.fa, &.fa-brands, &.fa-classic, &.fa-regular, &.fa-sharp, &.fa-solid, &.fab, &.far, &.fas {
+        --tblr-icon-size: 1rem;
+        &.dropdown-item-icon {
+            line-height: 1.25rem;
+        }
+    }
+}
+
+.btn {
+    .icon {
+        &.fa, &.fa-brands, &.fa-classic, &.fa-regular, &.fa-sharp, &.fa-solid, &.fab, &.far, &.fas {
+            vertical-align: middle;
+        }
+    }
+    .icon-sm {
+        &.fa, &.fa-brands, &.fa-classic, &.fa-regular, &.fa-sharp, &.fa-solid, &.fab, &.far, &.fas {
+            --tblr-icon-size: 0.75rem;
+            line-height: 0.85rem;
+        }
+    }
+}

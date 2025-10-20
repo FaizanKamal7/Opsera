@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="bg" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="_RBPUof" resname="homepage">
+        <source>homepage</source>
+        <target>Начало</target>
+      </trans-unit>
+      <trans-unit id="UmeJHDN" resname="http_error.name">
+        <source>http_error.name</source>
+        <target>Грешка {status_code, number}</target>
+      </trans-unit>
+      <trans-unit id="SCjzdE1" resname="http_error.description">
+        <source>http_error.description</source>
+        <target>Има неизвестна грешка (HTTP {status_code, number}) , която спира изпълнението на заявката.</target>
+      </trans-unit>
+      <trans-unit id="RKFQtz9" resname="http_error.suggestion">
+        <source>http_error.suggestion</source>
+        <target><![CDATA[Опитайте да заредите тази страница няколко минути по-късно или <a href="{url}">се върни в началната страница</a>.]]></target>
+      </trans-unit>
+      <trans-unit id="pxvXYat" resname="http_error_403.description">
+        <source>http_error_403.description</source>
+        <target>Нямате права за да достъпите този ресурс.</target>
+      </trans-unit>
+      <trans-unit id="EXqbVXq" resname="http_error_403.suggestion">
+        <source>http_error_403.suggestion</source>
+        <target>Попитайте вашият мениджър или системен администратор да ви позволи достъп до този ресурс.</target>
+      </trans-unit>
+      <trans-unit id=".zK3_xt" resname="http_error_404.description">
+        <source>http_error_404.description</source>
+        <target>Страницата която търсите не е намерена.</target>
+      </trans-unit>
+      <trans-unit id="Bf.fwkH" resname="http_error_404.suggestion">
+        <source>http_error_404.suggestion</source>
+        <target><![CDATA[Проверете за правописни грешки в URL адреса или <a href="{url}">се върнете в началната страница</a>.]]></target>
+      </trans-unit>
+      <trans-unit id="5P2XiOi" resname="http_error_500.description">
+        <source>http_error_500.description</source>
+        <target>Възникна вътрешно сървърна грешка.</target>
+      </trans-unit>
+      <trans-unit id="qDBV.z_" resname="http_error_500.suggestion">
+        <source>http_error_500.suggestion</source>
+        <target><![CDATA[Опитайте да заредите тази страница отново след няколко минути или <a href="{url}">се върнете в началната страница</a>.]]></target>
+      </trans-unit>
+      <trans-unit id="Fm3PJmt" resname="Open personal menu">
+        <source>Open personal menu</source>
+        <target>Отвори пероналното меню</target>
+      </trans-unit>
+      <trans-unit id="rPENuxy" resname="Sign out">
+        <source>Sign out</source>
+        <target>Изход</target>
+      </trans-unit>
+      <trans-unit id="F_O6_sI" resname="title.user_profile">
+        <source>title.user_profile</source>
+        <target>Моят профил</target>
+      </trans-unit>
+      <trans-unit id="2LD_ivf" resname="title.change_password">
+        <source>title.change_password</source>
+        <target>Смяна на паролата</target>
+      </trans-unit>
+      <trans-unit id="2q0mCJg" resname="action.save_changes">
+        <source>action.save_changes</source>
+        <target>Запиши промените</target>
+      </trans-unit>
+      <trans-unit id="80bO76v" resname="action.save">
+        <source>action.save</source>
+        <target>Запиши</target>
+      </trans-unit>
+      <trans-unit id="zSYrwPI" resname="action.submit">
+        <source>action.submit</source>
+        <target>Потвърди</target>
+      </trans-unit>
+      <trans-unit id="wPEuKmL" resname="action.cancel">
+        <source>action.cancel</source>
+        <target>Откажи</target>
+      </trans-unit>
+      <trans-unit id="3bCUfe8" resname="action.change_password">
+        <source>action.change_password</source>
+        <target>Смени паролата</target>
+      </trans-unit>
+      <trans-unit id="6ta.Ukc" resname="label.username">
+        <source>label.username</source>
+        <target>Потребителско име</target>
+      </trans-unit>
+      <trans-unit id="N9lph3Q" resname="label.fullname">
+        <source>label.fullname</source>
+        <target>Пълно име</target>
+      </trans-unit>
+      <trans-unit id="ykW6lkh" resname="label.email">
+        <source>label.email</source>
+        <target>Ел. поща</target>
+      </trans-unit>
+      <trans-unit id="Ogsv.lD" resname="label.language">
+        <source>label.language</source>
+        <target>Език</target>
+      </trans-unit>
+      <trans-unit id="yaiKGee" resname="label.password">
+        <source>label.password</source>
+        <target>Парола</target>
+      </trans-unit>
+      <trans-unit id="VFWIDIH" resname="label.remember_me">
+        <source>label.remember_me</source>
+        <target>Запази ме логнат в приложението</target>
+      </trans-unit>
+      <trans-unit id="9c4z0Po" resname="label.current_password">
+        <source>label.current_password</source>
+        <target>Текуща парола</target>
+      </trans-unit>
+      <trans-unit id="oyd10Po" resname="label.new_password">
+        <source>label.new_password</source>
+        <target>Нова парола</target>
+      </trans-unit>
+      <trans-unit id="Af_AUtA" resname="label.new_password_confirm">
+        <source>label.new_password_confirm</source>
+        <target>Потвърдете паролата</target>
+      </trans-unit>
+      <trans-unit id="Gj4Ca1d" resname="label.role">
+        <source>label.role</source>
+        <target>Роля</target>
+      </trans-unit>
+      <trans-unit id="nSbG6xa" resname="ui.datagrid.batch_actions.select_all">
+        <source>ui.datagrid.batch_actions.select_all</source>
+        <target>Избери всички</target>
+      </trans-unit>
+      <trans-unit id="AELRp5e" resname="ui.datagrid.no_result">
+        <source>ui.datagrid.no_result</source>
+        <target>Няма резултат</target>
+      </trans-unit>
+      <trans-unit id="D82cip3" resname="ui.datagrid.pagination.all_items">
+        <source>ui.datagrid.pagination.all_items</source>
+        <target>Всички</target>
+      </trans-unit>
+      <trans-unit id="1VDAq3Z" resname="ui.datagrid.column.boolean.true">
+        <source>ui.datagrid.column.boolean.true</source>
+        <target>Да</target>
+      </trans-unit>
+      <trans-unit id="ptpKpCu" resname="ui.datagrid.column.boolean.false">
+        <source>ui.datagrid.column.boolean.false</source>
+        <target>Не</target>
+      </trans-unit>
+      <trans-unit id="0i6zU3z" resname="ui.datagrid.pagination.previous">
+        <source>ui.datagrid.pagination.previous</source>
+        <target>назад</target>
+      </trans-unit>
+      <trans-unit id="AFEQZHN" resname="ui.datagrid.pagination.next">
+        <source>ui.datagrid.pagination.next</source>
+        <target>напред</target>
+      </trans-unit>
+      <trans-unit id="SZBL2XL" resname="ui.datagrid.pagination.records_count">
+        <source>ui.datagrid.pagination.records_count</source>
+        <target>{count, plural, =0 {Няма записи} =1 {Един запис} other {# записа}}</target>
+      </trans-unit>
+      <trans-unit id="3YhWFK3" resname="title.users_index">
+        <source>title.users_index</source>
+        <target>Потребители</target>
+      </trans-unit>
+      <trans-unit id="3YhWFK4" resname="title.url_shortner">
+        <source>title.url_shortner</source>
+        <target>Потребители</target>
+      </trans-unit>
+      <trans-unit id="mpHDX6N" resname="Administration">
+        <source>Administration</source>
+        <target>Администрация</target>
+      </trans-unit>
+      <trans-unit id="mGry.7f" resname="Is equal to">
+        <source>Is equal to</source>
+        <target>Е равно на</target>
+      </trans-unit>
+      <trans-unit id="485OguK" resname="Is not equal to">
+        <source>Is not equal to</source>
+        <target>Не е равно на</target>
+      </trans-unit>
+      <trans-unit id="vM6jhE3" resname="Is null">
+        <source>Is null</source>
+        <target>Е NULL</target>
+      </trans-unit>
+      <trans-unit id="D8trc_5" resname="Is not null">
+        <source>Is not null</source>
+        <target>Не е NULL</target>
+      </trans-unit>
+      <trans-unit id="8_0PBhZ" resname="Is lower than">
+        <source>Is lower than</source>
+        <target>Е по-малко от</target>
+      </trans-unit>
+      <trans-unit id="iaYcqii" resname="Is lower then or equal">
+        <source>Is lower then or equal</source>
+        <target>Е по-малко или равно на</target>
+      </trans-unit>
+      <trans-unit id="FM7r9sI" resname="Is greater than">
+        <source>Is greater than</source>
+        <target>Е по-голямо от</target>
+      </trans-unit>
+      <trans-unit id="EGWr34k" resname="Is greater than or equal">
+        <source>Is greater than or equal</source>
+        <target>Е по-голямо или равно на</target>
+      </trans-unit>
+      <trans-unit id="EmVTiTe" resname="Is empty">
+        <source>Is empty</source>
+        <target>Е празно</target>
+      </trans-unit>
+      <trans-unit id="G8DmLxC" resname="Is not empty">
+        <source>Is not empty</source>
+        <target>Не е празно</target>
+      </trans-unit>
+      <trans-unit id="IrK4Jg7" resname="Is starting with">
+        <source>Is starting with</source>
+        <target>Започва със</target>
+      </trans-unit>
+      <trans-unit id="ZF5yxHT" resname="Is not starting with">
+        <source>Is not starting with</source>
+        <target>Не започва със</target>
+      </trans-unit>
+      <trans-unit id="THQPY9u" resname="Is ending with">
+        <source>Is ending with</source>
+        <target>Завършва на</target>
+      </trans-unit>
+      <trans-unit id="omr2kyD" resname="Is not ending with">
+        <source>Is not ending with</source>
+        <target>Не завършва на</target>
+      </trans-unit>
+      <trans-unit id="RXk3ErM" resname="Contains">
+        <source>Contains</source>
+        <target>Съдържа</target>
+      </trans-unit>
+      <trans-unit id="NdrD7Du" resname="Does not contain">
+        <source>Does not contain</source>
+        <target>Не съдържа</target>
+      </trans-unit>
+      <trans-unit id="37wivZ3" resname="ID">
+        <source>ID</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="VhxhtYo" resname="Username">
+        <source>Username</source>
+        <target>Потребителско име</target>
+      </trans-unit>
+      <trans-unit id="i9.ArB8" resname="Full name">
+        <source>Full name</source>
+        <target>Пълно име</target>
+      </trans-unit>
+      <trans-unit id="wVFHuss" resname="Role">
+        <source>Role</source>
+        <target>Роля</target>
+      </trans-unit>
+      <trans-unit id="JjO6Nuw" resname="Active">
+        <source>Active</source>
+        <target>Активен</target>
+      </trans-unit>
+      <trans-unit id="5q6OTdQ" resname="Language">
+        <source>Language</source>
+        <target>Език</target>
+      </trans-unit>
+      <trans-unit id="ybqiXt5" resname="Inactive">
+        <source>Inactive</source>
+        <target>Неактивен</target>
+      </trans-unit>
+      <trans-unit id="kIqhHtP" resname="Admin">
+        <source>Admin</source>
+        <target>Администратор</target>
+      </trans-unit>
+      <trans-unit id="p7g8gzA" resname="Super admin">
+        <source>Super admin</source>
+        <target>Супер администратор</target>
+      </trans-unit>
+      <trans-unit id="TkiKoB6" resname="User">
+        <source>User</source>
+        <target>Потребител</target>
+      </trans-unit>
+      <trans-unit id="gzEusjk" resname="Loading...">
+        <source>Loading...</source>
+        <target>Зареждане...</target>
+      </trans-unit>
+      <trans-unit id="wTXq9lp" resname="app.actions.edit.imp">
+        <source>app.actions.edit.imp</source>
+        <target>Редактирай</target>
+      </trans-unit>
+      <trans-unit id="rkVXwCn" resname="app.actions.edit.noun">
+        <source>app.actions.edit.noun</source>
+        <target>Редактиране</target>
+      </trans-unit>
+      <trans-unit id="dRNHWgg" resname="Activate">
+        <source>Activate</source>
+        <target>Активирай</target>
+      </trans-unit>
+      <trans-unit id="S5P7nQd" resname="Deactivate">
+        <source>Deactivate</source>
+        <target>Деактивирай</target>
+      </trans-unit>
+      <trans-unit id="ap5cmeq" resname="Apply">
+        <source>Apply</source>
+        <target>Приложи</target>
+      </trans-unit>
+      <trans-unit id="D9gsTac" resname="ui.datagrid.row.actions.remove.confirm">
+        <source>ui.datagrid.row.actions.remove.confirm</source>
+        <target>Искате ли да изтриете избрания запис?</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

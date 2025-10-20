@@ -1,0 +1,230 @@
+/* assets/styles/custom.scss */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap');
+
+/* Custom Color Palette */
+$primary: #418fa0;
+$primary-light: #77a4b1;
+$primary-lighter: #99bbc5;
+$primary-lightest: #cddee2;
+$primary-dark: #2c7a8a;
+
+$secondary: #80aab6;
+
+$gray-100: #e6eef1;
+$gray-200: #d4e3e6;
+$gray-300: #cddee2;
+$gray-400: #aac5ce;
+$gray-500: #99bbc5;
+$gray-600: #80aab6;
+$gray-700: #77a4b1;
+$gray-800: #418fa0;
+
+$font-sans-serif: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-headings: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
+
+$body-color: #1d273b;
+$body-bg: #f8fafc;
+
+$link-color: $primary;
+$link-hover-color: $primary-dark;
+
+$border-color: $gray-200;
+
+/* Apply heading font */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: $font-headings;
+    font-weight: 600;
+}
+
+/* Custom Button Styles */
+.btn-primary {
+    background-color: $primary;
+    border-color: $primary;
+
+    &:hover {
+        background-color: $primary-dark;
+        border-color: $primary-dark;
+    }
+}
+
+/* Custom Navbar */
+.navbar-dark {
+    --tblr-navbar-bg: #{$primary};
+    --tblr-navbar-border-color: #{$primary-dark};
+}
+
+/* Custom Card Styles */
+.card {
+    border-color: $border-color;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Custom Form Controls */
+.form-control:focus {
+    border-color: $primary-light;
+    box-shadow: 0 0 0 0.25rem rgba($primary, 0.15);
+}
+
+/* Public Home */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    height: 6rem;
+    background: #f8f8f8;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007b8d;
+    margin-left: 2rem;
+}
+
+.language-selector select {
+    border: none;
+    padding: 5px;
+}
+
+.hero {
+    height: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    position: relative;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), var(--hero-bg);
+}
+
+.search-box {
+    display: flex;
+    background: white;
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 800px;
+    min-width: 300px;
+
+    @media (max-width: 768px) {
+        width: 90%;
+        max-width: 100%;
+    }
+
+    input.form-control {
+        flex-grow: 1;
+        min-width: 200px;
+        border: none;
+        outline: none;
+        padding: 8px 12px;
+    }
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    flex: 1;
+}
+
+.search-box button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Form Elements */
+.table-selectable-check {
+    transform: scale(0.7) !important;
+}
+
+.custom-icon {
+    color: rgb(206, 206, 206);
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.custom-svg-wrapper svg {
+    width: 24px;
+    height: 24px;
+    fill: green;
+}
+
+.form-fieldset {
+    background-color: white !important;
+    background: white !important;
+}
+
+.home-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 200px;
+    padding: 40px 20px;
+}
+
+.home-content h2 {
+    margin: 0 0 20px 0;
+}
+
+.home-content p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    max-width: 800px;
+}
+
+.global-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(2px);
+
+    &__spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    &__text {
+        margin-top: 1rem;
+        color: #333;
+        font-weight: bold;
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

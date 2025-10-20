@@ -1,0 +1,108 @@
+{# templates/components/ProductSearch.html.twig #}
+<div {{ attributes }}>
+    {% if this.query %}
+    <h3>Search results for "{{ this.query }} "</h3>
+    {% endif %}
+
+    {% for sku, product_data in this.products %}
+    <div class="card m-2">
+        <div class="card-header">
+            <h3 class="card-title">Product Manual for {{ sku }} - {{ product_data.name }}</h3>
+        </div>
+        <div class="list-group list-group-flush">
+            <div class="list-group-item">
+                <b>Manual available in followning languages</b>
+                <br>
+                {% for lang_code, lang_doc in product_data.manual.getLanguageDocuments() %}
+                <a href="{{lang_doc.file}}" target="_blank" rel="noopener noreferrer">
+                    <div class="row align-items-center">
+                        <div class="col-auto"><span class="badge bg-red"></span></div>
+                        <div class="col-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-file-type-pdf">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                                <path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4" />
+                                <path d="M5 18h1.5a1.5 1.5 0 0 0 0 -3h-1.5v6" />
+                                <path d="M17 18h2" />
+                                <path d="M20 15h-3v6" />
+                                <path d="M11 15v6h1a2 2 0 0 0 2 -2v-2a2 2 0 0 0 -2 -2h-1z" />
+                            </svg>
+                        </div>
+                        <div class="col text-truncate">
+                            <div class="text-reset d-block">{{ lang_code }}</div>
+                            <div class="d-block text-secondary text-truncate mt-n1">Last modified:
+                                {{lang_doc.lastModified |
+                                date('Y-m-d H:i:s')}}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="list-group-item-actions">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="icon icon-tabler icons-tabler-outline icon-tabler-download">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+                                    <path d="M7 11l5 5l5 -5" />
+                                    <path d="M12 4l0 12" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+                <br>
+                <b>Special documents regarding the product</b>
+                <br>
+                {% for doc_code, spec_doc in product_data.manual.getSpecialDocuments() %}
+                <a href="{{spec_doc.file}}" target="_blank" rel="noopener noreferrer">
+                    <div class="row align-items-center">
+                        <div class="col-auto"><span class="badge bg-red"></span></div>
+                        <div class="col-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-file-type-pdf">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                                <path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4" />
+                                <path d="M5 18h1.5a1.5 1.5 0 0 0 0 -3h-1.5v6" />
+                                <path d="M17 18h2" />
+                                <path d="M20 15h-3v6" />
+                                <path d="M11 15v6h1a2 2 0 0 0 2 -2v-2a2 2 0 0 0 -2 -2h-1z" />
+                            </svg>
+                        </div>
+                        <div class="col text-truncate">
+                            <div class="text-reset d-block">{{ doc_code }}</div>
+                            <div class="d-block text-secondary text-truncate mt-n1">Last modified:
+                                {{spec_doc.lastModified |
+                                date('Y-m-d H:i:s')}}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="list-group-item-actions">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="icon icon-tabler icons-tabler-outline icon-tabler-download">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+                                    <path d="M7 11l5 5l5 -5" />
+                                    <path d="M12 4l0 12" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+
+
+</div>

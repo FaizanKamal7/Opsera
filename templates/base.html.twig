@@ -1,0 +1,88 @@
+{% extends '@theme/layout-vertical.html.twig' %}
+
+{% block title %}{% if block('page_title') is not empty %}{{ block('page_title') }} - {% endif %}SmartFlow{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% block head_javascripts %}
+<script src="{{ asset('bundles/tabler/tabler.js') }}?{{ tabler_asset_version() }}"></script>
+{% block importmap %}{{ importmap('app') }}{% endblock %}
+{% endblock %}
+{% endblock %}
+
+{% block page_title %}{% endblock %}
+
+{% block app_logo %}
+<h1
+    class="{% block navbar_brand_classes %}navbar-brand {% block navbar_brand_class %}navbar-brand-autodark{% endblock %}{% endblock %}">
+    <img src="{{ asset('images/logo_white_bg.png') }}" width="110" height="32" alt="Wiltec" class="navbar-brand-image">
+    <span class="app-version-tag">v{{ app_version() }}</span>
+</h1>
+{% endblock %}
+
+{% block header %}
+{% if not tabler_bundle.isCondensedNavbar() %}
+<header id="{% block header_id %}{% endblock %}"
+    class="navbar navbar-expand-md d-none d-lg-flex sticky-top d-print-none">
+    <div class="{{ ''|tabler_container }}">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-nav flex-row order-md-last">
+            {{ _self.navbar(navbarStartContent, navbarNotificationsContent, navbarUserContent, navbarEndContent) }}
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-menu">
+            {# {% block navbar_search %}#}
+            {# {% include '@theme/includes/navbar_search.html.twig' %}#}
+            {# {% endblock %}#}
+        </div>
+    </div>
+</header>
+{% endif %}
+{% endblock %}
+
+{% block navbar_start %}
+{% if app.session.get('theme') == 'dark' %}
+<a href="{{ path('ui_light_mode') }}" class="nav-link px-0 me-2" title="" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-original-title="Enable light mode" data-turbo="false">
+    {{ tabler_icon('theme-light-mode-on', true) }}
+</a>
+{% else %}
+<a href="{{ path('ui_use_dark_mode') }}" class="nav-link px-0 me-2" title="" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-original-title="Enable dark mode" data-turbo="false">
+    {{ tabler_icon('theme-dark-mode-on', true) }}
+</a>
+{% endif %}
+{% endblock %}
+
+{% block navbar_user %}
+{% include '@theme/includes/navbar_user.html.twig' %}
+{% endblock %}
+
+{% block page_pretitle %}{% endblock %}
+{% block page_subtitle %}{% endblock %}
+
+{% block page_actions %}{% endblock %}
+
+{% block page_content_before %}{% endblock %}
+
+{% block page_content_start %} {{ parent() }} {% endblock %}
+{% block page_content %}{% endblock %}
+{% block page_content_end %}{% endblock %}
+
+{% block page_content_after %}{% endblock %}
+
+{% block footer %}
+<footer class="footer footer-transparent d-print-none" style="padding: 1rem 0 0.5rem 0;">
+    <div class="{{ ''|tabler_container }}">
+        <hr class="mt-0 mb-2">
+        SmartFlow v{{ app_version() }} ∴ © {{ 'now'|date('Y') }} <a href="https://www.expert-m.net" target="_blank"
+            style="color: var(--tblr-gray-500)">Expert M Ltd.</a>
+    </div>
+</footer>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

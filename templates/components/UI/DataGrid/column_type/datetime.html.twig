@@ -1,0 +1,4 @@
+{% set value = column.value(item) %}
+{% set format = params.format|default('Y-m-d H:i:s') %}
+
+{% if value is not null %}{{ value|date(format) }}{% else %}{{ null_value|default('-') }}{% endif %}

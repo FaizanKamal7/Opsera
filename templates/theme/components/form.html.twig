@@ -1,0 +1,16 @@
+{% extends '@theme/embeds/card.html.twig' %}
+
+{% set _form = form|default(null) %}
+
+{% import '@theme/components/buttons.html.twig' as buttons %}
+{% form_theme form '@theme/layout/form-theme-horizontal.html.twig' %}
+{% block box_before %}{{ form_start(_form) }}{% endblock %}
+{% block box_title %}{% endblock %}
+{% block box_body %}
+    {{ form_widget(_form) }}
+{% endblock %}
+{% block box_footer %}
+    {{ buttons.submit_button('form-submit', {title : 'action.submit'}, 'primary') }}
+    {#    {{ buttons.link_button('action.cancel', 'javascript:history.back()', 'form-cancel', 'default') }}#}
+{% endblock %}
+{% block box_after %}{{ form_end(_form)}}{% endblock %}

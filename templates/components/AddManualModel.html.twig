@@ -1,0 +1,122 @@
+<div{{ attributes }}>
+    <form method="get" action="#">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Manual</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Title</label>
+                    <input type="text" class="form-control" name="title" placeholder="Enter product title" />
+                </div>
+                <label class="form-label">Manual Type</label>
+                <div class="form-selectgroup-boxes row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-selectgroup-item">
+                            <input type="radio" name="manual_type" value="simple" class="form-selectgroup-input"
+                                data-model="manual_type" {{ this.manual_type=='simple' ? 'checked' : '' }} />
+                            <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                <span class="me-3"><span class="form-selectgroup-check"></span></span>
+                                <span class="form-selectgroup-label-content">
+                                    <span class="form-selectgroup-title strong mb-1">Simple URL</span>
+                                    <span class="d-block text-secondary">Add uploaded manual URL and get shortened
+                                        URL</span>
+                                </span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-selectgroup-item">
+                            <input type="radio" name="manual_type" value="advanced" class="form-selectgroup-input"
+                                data-model="manual_type" {{ this.manual_type=='advanced' ? 'checked' : '' }} />
+                            <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                <span class="me-3"><span class="form-selectgroup-check"></span></span>
+                                <span class="form-selectgroup-label-content">
+                                    <span class="form-selectgroup-title strong mb-1">Advanced (Upload Manual)</span>
+                                    <span class="d-block text-secondary">Upload Manual & Get auto-generated
+                                        URL</span>
+                                </span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                {# Simple URL Card #}
+                <div class="card mb-3" {{ this.manual_type !='simple' ? 'style="display: none;"' : '' }}>
+                    <div class="card-status-top bg-info"></div>
+                    <div class="card-body">
+                        <label class="form-label mb-3">Enter Product Manual URL</label>
+                        <input type="text" class="form-control mb-3" name="manual_url"
+                            placeholder="Enter product Manual URL" />
+                    </div>
+                </div>
+
+                {# Advanced Upload Card #}
+                <div class="card mb-3" {{ this.manual_type !='advanced' ? 'style="display: none;"' : '' }}>
+                    <div class="card-status-top bg-info"></div>
+                    <div class="card-body">
+                        <label class="form-label mb-3">Enter Product SKU</label>
+                        <input type="text" class="form-control mb-3" name="sku" placeholder="Enter product SKU" />
+                        <label class="form-label mb-3">Select Document Type</label>
+                        <select class="form-select  mb-3">
+                            <optgroup label="Manual Language">
+                                {% for case in enum_cases('App\\Enum\\DocumentManual\\LanguageDocument') %}
+                                <option value="{{ case.value }}"><b>{{ case.value }}</b> - {{ case.label }} Language
+                                </option>
+                                {% endfor %}
+                            </optgroup>
+                            <optgroup label="Manual related special Documents">
+                                {% for case in enum_cases('App\\Enum\\DocumentManual\\SpecialDocument') %}
+                                <option value="{{ case.value }}"><b>{{ case.value }}</b> - {{ case.label }}</option>
+                                {% endfor %}
+                            </optgroup>
+                        </select>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload Manual File</label>
+                            <input class="form-control" type="file" id="formFile" name="manual_file">
+                        </div>
+                    </div>
+                </div>
+
+                <label class="form-label mb-3">Generated URL</label>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="input-group input-group-flat">
+                            <span class="input-group-text"> https://{{app_server_name}}/ </span>
+                            <input type="text" name="hash" class="form-control ps-0" value=""
+                                placeholder="your-hash-here" data-model="hash" autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <button type="button" class="btn btn-cyan" data-action="live#action"
+                            data-live-action-param="verifyHash">
+                            Generate Short Manual URL
+                        </button>
+                    </div>
+                </div>
+                {% if this.isAlreadyExist %}
+                <br>
+                <twig:Alert message="Hash already exist. Replaced with non-existing" type="danger" />
+                {% endif %}
+
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal"> Cancel </a>
+                <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 5l0 14"></path>
+                        <path d="M5 12l14 0"></path>
+                    </svg>
+                    Add Manual
+                </a>
+            </div>
+        </div>
+    </form>
+
+    </div>
