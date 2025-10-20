@@ -1,6 +1,6 @@
-# SmartFlow-Portal
+# Opsera
 
-Symfony 7 Skeleton APP
+Symfony 7 service portal
 
 Requirements
 ------------
