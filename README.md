@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-SmartFlow
-========================
+# SmartFlow-Portal
 
 Symfony 7 Skeleton APP
 
@@ -133,6 +131,3 @@ Execute this command to run tests:
 ```bash
 ./sflow phpunit
 ```
-=======
-# SmartFlow-Portal
->>>>>>> 78acfd21e8952416d45903309088180a24fc8f52
