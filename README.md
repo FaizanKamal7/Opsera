@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-SmartFlow
-========================
+# Opsera
 
-Symfony 7 Skeleton APP
+Symfony 7 service portal
 
 Requirements
 ------------
@@ -133,6 +131,3 @@ Execute this command to run tests:
 ```bash
 ./sflow phpunit
 ```
-=======
-# SmartFlow-Portal
->>>>>>> 78acfd21e8952416d45903309088180a24fc8f52
